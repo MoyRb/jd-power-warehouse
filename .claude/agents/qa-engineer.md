@@ -1,4 +1,4 @@
-﻿---
+---
 name: qa-engineer
 description: Designs and verifies automated functional tests
 ---

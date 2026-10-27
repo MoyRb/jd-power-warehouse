@@ -1,4 +1,4 @@
-﻿---
+---
 name: commerce-specialist
 description: Reviews B2B ecommerce workflows and commercial rules
 ---

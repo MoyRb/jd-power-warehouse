@@ -1,0 +1,2767 @@
+{
+  "timestamp": "2026-10-26T23:32:36.023Z",
+  "baseUrl": "https://preview-1784678966980352958.vibepreview.com",
+  "accessStatus": {
+    "exists": true,
+    "status": 200
+  },
+  "routes": {
+    "/sell": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": null,
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(41, 41, 41, 0.3)",
+          "rgba(243, 196, 27, 0.1)",
+          "rgb(20, 20, 20)",
+          "rgba(243, 196, 27, 0.05)",
+          "rgba(41, 41, 41, 0.1)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "48px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(243, 196, 27)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Sell Your Overstock & Tools for Cash | JD Power Warehouse IL",
+        "metaDescription": "Got overstock, tools, or outdoor equipment? Sell your home improvement items directly to JD Power Warehouse in Plainfield, IL for quick cash.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 23
+      }
+    },
+    "/shop": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": null,
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/59444aeb-52d7-40e5-8f8f-1",
+            "alt": "7-Piece Patio Dining Set",
+            "width": 400,
+            "height": 599
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/5ecd6b7e-2134-4677-8677-5",
+            "alt": "DeWalt 20V Max Drill Combo Kit",
+            "width": 400,
+            "height": 237
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/60b4b087-e634-44d5-af6f-6",
+            "alt": "Folding Adirondack Chair",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/aba2682c-92e7-426b-957d-a",
+            "alt": "Gorilla Carts Steel Utility Cart",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/de38cf64-2f38-4c1c-b540-8",
+            "alt": "Kitchen Faucet with Pull-Down Sprayer",
+            "width": 400,
+            "height": 267
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/83cf087a-4136-4a1a-89f7-8",
+            "alt": "LED Shop Light (4ft)",
+            "width": 0,
+            "height": 0
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/8d8390a7-66bb-4ff2-a6ca-7",
+            "alt": "Milwaukee M18 Fuel Sawzall",
+            "width": 1024,
+            "height": 1024
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/83cf087a-4136-4a1a-89f7-8",
+            "alt": "Outdoor Solar Path Lights (6pk)",
+            "width": 0,
+            "height": 0
+          },
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/assets/de38cf64-2f38-4c1c-b540-8",
+            "alt": "Ridgid 14 Gal Wet/Dry Vac",
+            "width": 400,
+            "height": 267
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgb(20, 20, 20)",
+          "rgb(41, 41, 41)",
+          "rgba(0, 0, 0, 0.75)",
+          "rgb(255, 255, 255)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(243, 196, 27)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Shop Liquidation Inventory | JD Power Warehouse Plainfield IL",
+        "metaDescription": "Browse tools, lawn equipment, grills, and outdoor patio sets up to 70% off retail prices. Local pickup in Plainfield, IL or instant WhatsApp reservation.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 66
+      }
+    },
+    "/testimonials": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": {
+          "heading": "Testimonials",
+          "subheading": "Hear from our local customers in Plainfield and the surrounding areas about their experience shoppin",
+          "hasCta": false,
+          "ctaText": "",
+          "bgColor": "rgb(243, 196, 27)"
+        },
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          },
+          {
+            "id": "",
+            "classes": "bg-primary text-primary-foreground py-20 px-4 text-center",
+            "heading": "Testimonials"
+          },
+          {
+            "id": "",
+            "classes": "py-24 px-4 bg-muted/30",
+            "heading": "Michael R."
+          },
+          {
+            "id": "",
+            "classes": "py-20 px-4 text-center space-y-8 max-w-4xl mx-auto",
+            "heading": "Join our community of happy DIYers"
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(41, 41, 41, 0.3)",
+          "rgb(20, 20, 20)",
+          "rgba(243, 196, 27, 0.05)",
+          "rgb(236, 189, 19)",
+          "rgba(243, 196, 27, 0.1)",
+          "rgb(41, 41, 41)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "60px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(15, 15, 15)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "h2FontSize": "30px",
+        "h2FontWeight": "700",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Customer Testimonials | JD Power Warehouse",
+        "metaDescription": "Read what our customers have to say about the quality, prices, and service at JD Power Warehouse in Plainfield, IL.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 32
+      }
+    },
+    "/about": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": null,
+        "productCards": [],
+        "footer": {
+          "bg": "rgba(41, 41, 41, 0.5)",
+          "links": [
+            "JDJD Power Warehouse",
+            "Home",
+            "Shop Inventory",
+            "Sell Your Items",
+            "Testimonials",
+            "About Us",
+            "",
+            "",
+            "Privacy Policy",
+            "Terms & Conditions"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          },
+          {
+            "id": "",
+            "classes": "relative py-24 bg-primary/5",
+            "heading": "Our Story"
+          },
+          {
+            "id": "",
+            "classes": "py-20 px-4",
+            "heading": "Our Mission"
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(243, 196, 27, 0.05)",
+          "rgba(236, 189, 19, 0.1)",
+          "rgb(236, 189, 19)",
+          "rgba(243, 196, 27, 0.1)",
+          "rgba(41, 41, 41, 0.5)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "60px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(243, 196, 27)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "h2FontSize": "30px",
+        "h2FontWeight": "700",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "JDJD Power Warehouse",
+            "href": "/"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Shop Inventory",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "About Us | JD Power Warehouse",
+        "metaDescription": "Learn about JD Power Warehouse in Plainfield, IL. We bridge the gap between major retailers and the community with affordable home improvement products.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 31
+      }
+    },
+    "/contact": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": {
+          "heading": "Get In Touch",
+          "subheading": "Have questions about our inventory or want to check availability? Reach out — we're here to help.",
+          "hasCta": false,
+          "ctaText": "",
+          "bgColor": "rgba(41, 41, 41, 0.3)"
+        },
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          },
+          {
+            "id": "",
+            "classes": "bg-muted/30 py-12 md:py-20 px-4 border-b border-border/40",
+            "heading": "Get In Touch"
+          },
+          {
+            "id": "",
+            "classes": "py-12 md:py-16 px-4",
+            "heading": "WhatsApp"
+          },
+          {
+            "id": "",
+            "classes": "pb-16 md:pb-24 px-4",
+            "heading": "Send Us a Message"
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(41, 41, 41, 0.3)",
+          "rgba(243, 196, 27, 0.1)",
+          "rgb(20, 20, 20)",
+          "rgb(41, 41, 41)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "48px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "h2FontSize": "24px",
+        "h2FontWeight": "700",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Contact Us — JD Power Warehouse | Plainfield, IL",
+        "metaDescription": "Contact JD Power Warehouse in Plainfield, IL. Call us, message us on WhatsApp, or send us an inquiry. Open daily 6am–10pm for all your home improvement needs.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 29
+      }
+    },
+    "/privacy-policy": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": null,
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(140, 140, 140, 0.7)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "h2FontSize": "20px",
+        "h2FontWeight": "600",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Privacy Policy — JD Power Warehouse",
+        "metaDescription": "Read the JD Power Warehouse privacy policy to understand how we handle and protect your personal information.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 14
+      }
+    },
+    "/terms-and-conditions": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": null,
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(140, 140, 140, 0.7)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "h2FontSize": "20px",
+        "h2FontWeight": "600",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Terms & Conditions — JD Power Warehouse",
+        "metaDescription": "Read the terms and conditions for using the JD Power Warehouse website and purchasing our products.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 14
+      }
+    },
+    "/refund-policy": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": null,
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(140, 140, 140, 0.7)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "h2FontSize": "20px",
+        "h2FontWeight": "600",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Refund Policy — JD Power Warehouse",
+        "metaDescription": "Review the JD Power Warehouse refund and return policy for discounted overstock and liquidation products.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 14
+      }
+    },
+    "/shipping-policy": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "WhatsApp",
+            "href": "https://wa.me/18155550123"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "hero": null,
+        "productCards": [],
+        "footer": {
+          "bg": "rgb(10, 10, 10)",
+          "links": [
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Refund Policy",
+            "Shipping Policy"
+          ]
+        },
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [
+          {
+            "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+            "alt": "JD Power Warehouse Logo",
+            "width": 1254,
+            "height": 1254
+          }
+        ],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)",
+          "rgba(10, 10, 10, 0.95)",
+          "rgb(140, 140, 140)",
+          "rgba(140, 140, 140, 0.7)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "h2FontSize": "20px",
+        "h2FontWeight": "600",
+        "btnBg": "rgba(0, 0, 0, 0)",
+        "btnColor": "rgb(140, 140, 140)",
+        "btnBorderRadius": "10px",
+        "btnPadding": "0px 12px",
+        "btnFontSize": "14px",
+        "btnFontWeight": "500",
+        "btnText": "ES",
+        "navBg": "rgba(0, 0, 0, 0)",
+        "navColor": "rgb(246, 244, 238)",
+        "navHeight": "191px",
+        "internalLinks": [
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Sell your items to us!",
+            "href": "/sell"
+          },
+          {
+            "text": "Home",
+            "href": "/"
+          },
+          {
+            "text": "Catalogue",
+            "href": "/shop"
+          },
+          {
+            "text": "Sell Your Items",
+            "href": "/sell"
+          },
+          {
+            "text": "Testimonials",
+            "href": "/testimonials"
+          },
+          {
+            "text": "About Us",
+            "href": "/about"
+          },
+          {
+            "text": "Contact",
+            "href": "/contact"
+          },
+          {
+            "text": "Privacy Policy",
+            "href": "/privacy-policy"
+          },
+          {
+            "text": "Terms & Conditions",
+            "href": "/terms-and-conditions"
+          },
+          {
+            "text": "Refund Policy",
+            "href": "/refund-policy"
+          },
+          {
+            "text": "Shipping Policy",
+            "href": "/shipping-policy"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "Shipping & Pickup Policy — JD Power Warehouse",
+        "metaDescription": "Learn about local pickup options and delivery availability for JD Power Warehouse products in Plainfield, IL.",
+        "hasHeader": false,
+        "hasFooter": true,
+        "hasNav": true,
+        "hasHero": true,
+        "productCards": 14
+      }
+    },
+    "/products": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    },
+    "/categories": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    },
+    "/cart": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    },
+    "/checkout": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    },
+    "/login": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    },
+    "/register": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    },
+    "/account": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    },
+    "/orders": {
+      "exists": true,
+      "status": 200,
+      "structure": {
+        "navLinks": [],
+        "hero": null,
+        "productCards": [],
+        "footer": null,
+        "sections": [
+          {
+            "id": "",
+            "classes": "",
+            "heading": ""
+          }
+        ],
+        "images": [],
+        "colorsFound": [
+          "rgb(0, 0, 0)",
+          "rgb(10, 10, 10)",
+          "rgb(246, 244, 238)",
+          "rgb(41, 41, 41)",
+          "rgb(140, 140, 140)",
+          "rgb(243, 196, 27)",
+          "rgb(15, 15, 15)"
+        ]
+      },
+      "tokens": {
+        "bodyBg": "rgb(10, 10, 10)",
+        "bodyColor": "rgb(246, 244, 238)",
+        "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "bodyFontSize": "16px",
+        "h1FontSize": "36px",
+        "h1FontWeight": "700",
+        "h1Color": "rgb(246, 244, 238)",
+        "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "btnBg": "rgb(243, 196, 27)",
+        "btnColor": "rgb(15, 15, 15)",
+        "btnBorderRadius": "9999px",
+        "btnPadding": "0px",
+        "btnFontSize": "16px",
+        "btnFontWeight": "400",
+        "btnText": "",
+        "internalLinks": [
+          {
+            "text": "Return to Home",
+            "href": "/"
+          }
+        ],
+        "cssVars": {
+          "--background": "0 0% 4%",
+          "--foreground": "45 30% 95%",
+          "--card": "0 0% 8%",
+          "--card-foreground": "45 30% 95%",
+          "--popover": "0 0% 10%",
+          "--popover-foreground": "45 30% 95%",
+          "--primary": "47 90% 53%",
+          "--primary-foreground": "0 0% 6%",
+          "--secondary": "45 20% 18%",
+          "--secondary-foreground": "45 30% 95%",
+          "--muted": "0 0% 16%",
+          "--muted-foreground": "0 0% 55%",
+          "--accent": "47 85% 50%",
+          "--accent-foreground": "0 0% 6%",
+          "--destructive": "0 72% 51%",
+          "--destructive-foreground": "0 0% 98%",
+          "--border": "0 0% 18%",
+          "--input": "0 0% 18%",
+          "--ring": "47 90% 53%",
+          "--radius": ".75rem"
+        },
+        "fontLinks": [],
+        "pageTitle": "JD Power Warehouse — Quality Home Improvement for Less",
+        "metaDescription": "Save up to 70% on tools, outdoor furniture, landscaping, and home improvement products in Plainfield, IL. Quality overstock and liquidation deals at JD Power Warehouse.",
+        "hasHeader": false,
+        "hasFooter": false,
+        "hasNav": false,
+        "hasHero": true,
+        "productCards": 2
+      }
+    }
+  },
+  "designTokens": {
+    "bodyBg": "rgb(10, 10, 10)",
+    "bodyColor": "rgb(246, 244, 238)",
+    "bodyFont": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+    "bodyFontSize": "16px",
+    "h1FontSize": "72px",
+    "h1FontWeight": "700",
+    "h1Color": "rgb(255, 255, 255)",
+    "h1FontFamily": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+    "h2FontSize": "36px",
+    "h2FontWeight": "700",
+    "btnBg": "rgba(0, 0, 0, 0)",
+    "btnColor": "rgb(140, 140, 140)",
+    "btnBorderRadius": "10px",
+    "btnPadding": "0px 12px",
+    "btnFontSize": "14px",
+    "btnFontWeight": "500",
+    "btnText": "ES",
+    "navBg": "rgba(0, 0, 0, 0)",
+    "navColor": "rgb(246, 244, 238)",
+    "navHeight": "191px",
+    "internalLinks": [
+      {
+        "text": "Sell your items to us!",
+        "href": "/sell"
+      },
+      {
+        "text": "Sell your items to us!",
+        "href": "/sell"
+      },
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Catalogue",
+        "href": "/shop"
+      },
+      {
+        "text": "Sell Your Items",
+        "href": "/sell"
+      },
+      {
+        "text": "Testimonials",
+        "href": "/testimonials"
+      },
+      {
+        "text": "About Us",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      },
+      {
+        "text": "Contact Us",
+        "href": "/contact"
+      },
+      {
+        "text": "Tools & Construction SuppliesBrowse our ",
+        "href": "/shop"
+      },
+      {
+        "text": "Landscaping ProductsBrowse our latest de",
+        "href": "/shop"
+      },
+      {
+        "text": "Outdoor FurnitureBrowse our latest deals",
+        "href": "/shop"
+      },
+      {
+        "text": "Grills & Outdoor CookingBrowse our lates",
+        "href": "/shop"
+      },
+      {
+        "text": "Seasonal DealsBrowse our latest deals.",
+        "href": "/shop"
+      },
+      {
+        "text": "Home Improvement ProductsBrowse our late",
+        "href": "/shop"
+      },
+      {
+        "text": "Start Selling",
+        "href": "/sell"
+      },
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Catalogue",
+        "href": "/shop"
+      },
+      {
+        "text": "Sell Your Items",
+        "href": "/sell"
+      },
+      {
+        "text": "Testimonials",
+        "href": "/testimonials"
+      },
+      {
+        "text": "About Us",
+        "href": "/about"
+      },
+      {
+        "text": "Contact Us",
+        "href": "/contact"
+      },
+      {
+        "text": "Privacy Policy",
+        "href": "/privacy-policy"
+      },
+      {
+        "text": "Terms & Conditions",
+        "href": "/terms-and-conditions"
+      },
+      {
+        "text": "Refund Policy",
+        "href": "/refund-policy"
+      },
+      {
+        "text": "Shipping Policy",
+        "href": "/shipping-policy"
+      }
+    ],
+    "cssVars": {
+      "--background": "0 0% 4%",
+      "--foreground": "45 30% 95%",
+      "--card": "0 0% 8%",
+      "--card-foreground": "45 30% 95%",
+      "--popover": "0 0% 10%",
+      "--popover-foreground": "45 30% 95%",
+      "--primary": "47 90% 53%",
+      "--primary-foreground": "0 0% 6%",
+      "--secondary": "45 20% 18%",
+      "--secondary-foreground": "45 30% 95%",
+      "--muted": "0 0% 16%",
+      "--muted-foreground": "0 0% 55%",
+      "--accent": "47 85% 50%",
+      "--accent-foreground": "0 0% 6%",
+      "--destructive": "0 72% 51%",
+      "--destructive-foreground": "0 0% 98%",
+      "--border": "0 0% 18%",
+      "--input": "0 0% 18%",
+      "--ring": "47 90% 53%",
+      "--radius": ".75rem"
+    },
+    "fontLinks": [],
+    "pageTitle": "JD Power Warehouse — Discount Home Improvement & Tools in Plainfield, IL",
+    "metaDescription": "Save up to 70% on power tools, outdoor furniture, lawn equipment, grills, and hardware in Plainfield & Homer Glen, IL. Daily overstock deals at JD Power Warehouse.",
+    "hasHeader": false,
+    "hasFooter": true,
+    "hasNav": true,
+    "hasHero": true,
+    "productCards": 52
+  },
+  "pageStructure": {
+    "navLinks": [
+      {
+        "text": "Sell your items to us!",
+        "href": "/sell"
+      },
+      {
+        "text": "Sell your items to us!",
+        "href": "/sell"
+      },
+      {
+        "text": "WhatsApp",
+        "href": "https://wa.me/18155550123"
+      },
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Catalogue",
+        "href": "/shop"
+      },
+      {
+        "text": "Sell Your Items",
+        "href": "/sell"
+      },
+      {
+        "text": "Testimonials",
+        "href": "/testimonials"
+      },
+      {
+        "text": "About Us",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "hero": {
+      "heading": "Quality Home Improvement for Less",
+      "subheading": "Discounted tools, hardware, landscaping, and outdoor furniture from major retailers.",
+      "hasCta": true,
+      "ctaText": "View Inventory",
+      "bgColor": "rgba(0, 0, 0, 0)"
+    },
+    "productCards": [],
+    "footer": {
+      "bg": "rgb(10, 10, 10)",
+      "links": [
+        "",
+        "Home",
+        "Catalogue",
+        "Sell Your Items",
+        "Testimonials",
+        "About Us",
+        "Contact Us",
+        "",
+        "",
+        "Privacy Policy"
+      ]
+    },
+    "sections": [
+      {
+        "id": "",
+        "classes": "",
+        "heading": ""
+      },
+      {
+        "id": "",
+        "classes": "relative overflow-hidden pt-8 pb-12 md:pt-24 md:pb-32 px-4",
+        "heading": "Quality Home Improvement for Less"
+      },
+      {
+        "id": "",
+        "classes": "py-8 sm:py-12 md:py-24 bg-background",
+        "heading": "Explore Categories"
+      },
+      {
+        "id": "",
+        "classes": "py-12 md:py-24 px-4 bg-muted/30",
+        "heading": "Why Shop With Us?"
+      },
+      {
+        "id": "",
+        "classes": "py-12 md:py-24 px-4 bg-background border-t border-border/50",
+        "heading": "Have overstock or items to liquidate?"
+      },
+      {
+        "id": "",
+        "classes": "py-14 md:py-22 px-4 bg-primary text-primary-foreground relat",
+        "heading": "Ready to start your next project?"
+      }
+    ],
+    "images": [
+      {
+        "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+        "alt": "JD Power Warehouse Logo",
+        "width": 1254,
+        "height": 1254
+      },
+      {
+        "src": "https://vibe.filesafe.space/1784678966980352958/assets/e0ad9a1c-51d5-4f2e-928c-2",
+        "alt": "Power tools, drill sets, and toolboxes",
+        "width": 1376,
+        "height": 768
+      },
+      {
+        "src": "https://vibe.filesafe.space/1784678966980352958/assets/6c0ea11f-edcd-46c9-8ff7-3",
+        "alt": "Stainless steel outdoor grill and patio sets",
+        "width": 1376,
+        "height": 768
+      },
+      {
+        "src": "https://vibe.filesafe.space/1784678966980352958/assets/1c9b4004-7b51-41d9-b7a2-f",
+        "alt": "Lawn mowers, pressure washers, and outdoor equipment",
+        "width": 1376,
+        "height": 768
+      },
+      {
+        "src": "https://vibe.filesafe.space/1784678966980352958/assets/3d0961eb-ef72-4794-8338-b",
+        "alt": "High quality home improvement tools and supplies",
+        "width": 1200,
+        "height": 896
+      },
+      {
+        "src": "https://vibe.filesafe.space/1784678966980352958/assets/76d4c105-6c45-4b32-a80e-0",
+        "alt": "Construction tools and hardware",
+        "width": 1280,
+        "height": 896
+      },
+      {
+        "src": "https://vibe.filesafe.space/1784678966980352958/attachments/151663a7-560a-4334-a",
+        "alt": "JD Power Warehouse Logo",
+        "width": 1254,
+        "height": 1254
+      }
+    ],
+    "colorsFound": [
+      "rgb(0, 0, 0)",
+      "rgb(10, 10, 10)",
+      "rgb(246, 244, 238)",
+      "rgb(243, 196, 27)",
+      "rgb(15, 15, 15)",
+      "rgba(10, 10, 10, 0.95)",
+      "rgb(140, 140, 140)",
+      "rgba(243, 196, 27, 0.9)",
+      "rgb(255, 255, 255)",
+      "rgb(241, 245, 249)",
+      "rgba(255, 255, 255, 0.1)",
+      "rgba(41, 41, 41, 0.3)",
+      "rgb(41, 41, 41)",
+      "rgba(243, 196, 27, 0.1)",
+      "rgba(15, 15, 15, 0.85)",
+      "rgba(243, 196, 27, 0.05)"
+    ]
+  },
+  "discoveredRoutes": [
+    "/sell",
+    "/",
+    "/shop",
+    "/testimonials",
+    "/about",
+    "/contact",
+    "/privacy-policy",
+    "/terms-and-conditions",
+    "/refund-policy",
+    "/shipping-policy"
+  ],
+  "errors": []
+}

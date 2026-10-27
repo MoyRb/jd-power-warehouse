@@ -1,4 +1,4 @@
-﻿---
+---
 name: security-auditor
 description: Audits changes for security risks and vulnerabilities
 tools: Read, Grep, Glob

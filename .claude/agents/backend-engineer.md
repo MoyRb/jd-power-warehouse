@@ -1,4 +1,4 @@
-﻿---
+---
 name: backend-engineer
 description: Implements secure backend services and data models
 ---

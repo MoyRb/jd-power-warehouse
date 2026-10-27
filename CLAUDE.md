@@ -63,3 +63,8 @@ A task is complete only when:
 ## Language
 Explain project progress and decisions in Spanish.
 Code, identifiers and technical documentation may use English.
+
+## Official visual reference
+Read docs/VISUAL_REFERENCE.md before frontend work.
+The supplied preview URL is the visual source of truth.
+Never claim visual equivalence without browser evidence.

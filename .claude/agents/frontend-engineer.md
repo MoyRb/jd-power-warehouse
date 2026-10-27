@@ -1,4 +1,4 @@
-﻿---
+---
 name: frontend-engineer
 description: Implements accessible responsive ecommerce interfaces
 ---

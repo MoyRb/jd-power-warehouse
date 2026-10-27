@@ -1,0 +1,125 @@
+{
+  "timestamp": "2026-10-27T01:00:16.764Z",
+  "results": [
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "ok": false,
+      "error": "Error: page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n"
+    },
+    {
+      "route": "/shop",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/sell",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/contact",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/testimonials",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/about",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/privacy-policy",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/terms-and-conditions",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/refund-policy",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/shipping-policy",
+      "viewport": "desktop",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/shop",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/sell",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/contact",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/testimonials",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/about",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/privacy-policy",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/terms-and-conditions",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/refund-policy",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/shipping-policy",
+      "viewport": "mobile",
+      "status": 200,
+      "ok": true
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-﻿---
+---
 name: architect
 description: Reviews software architecture and technical decisions
 ---
