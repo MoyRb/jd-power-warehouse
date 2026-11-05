@@ -74,3 +74,57 @@ export async function updateProductAction(
   revalidatePath('/shop')
   return {}
 }
+
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+const MAX_SIZE = 5 * 1024 * 1024
+
+export async function uploadProductImageAction(
+  productId: string,
+  formData: FormData,
+): Promise<{ error?: string }> {
+  await requireAdmin()
+
+  const file = formData.get('file') as File | null
+  if (!file) return { error: 'No file provided' }
+
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return { error: 'Only JPEG, PNG, and WebP images are allowed' }
+  }
+  if (file.size > MAX_SIZE) {
+    return { error: 'Image must be 5 MB or smaller' }
+  }
+
+  const buffer = Buffer.from(await file.arrayBuffer())
+  try {
+    await db.uploadImage(productId, {
+      name: file.name,
+      type: file.type,
+      size: file.size,
+      buffer,
+    })
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Upload failed'
+    return { error: msg === 'INVALID_TYPE' ? 'Invalid file type' : msg === 'FILE_TOO_LARGE' ? 'File too large' : msg }
+  }
+
+  revalidatePath(`/admin/products/${productId}/edit`)
+  return {}
+}
+
+export async function deleteProductImageAction(
+  imageId: string,
+  productId: string,
+): Promise<void> {
+  await requireAdmin()
+  await db.deleteImage(imageId)
+  revalidatePath(`/admin/products/${productId}/edit`)
+}
+
+export async function reorderImagesAction(
+  productId: string,
+  imageIds: string[],
+): Promise<void> {
+  await requireAdmin()
+  await db.reorderImages(productId, imageIds)
+  revalidatePath(`/admin/products/${productId}/edit`)
+}

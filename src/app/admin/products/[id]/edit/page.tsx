@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/lib/auth/server'
 import { db } from '@/lib/db'
 import ProductForm from '@/components/admin/ProductForm'
+import ImageUploader from '@/components/admin/ImageUploader'
 import { updateProductAction } from '@/app/admin/_actions/products'
 
 export const instant = false
@@ -33,6 +34,10 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
         </p>
       </div>
       <ProductForm product={product} categories={categories} action={action} />
+
+      <div className="mt-8 pt-8 border-t border-[#2e2e2e] max-w-2xl">
+        <ImageUploader productId={id} images={product.images ?? []} />
+      </div>
     </div>
   )
 }
