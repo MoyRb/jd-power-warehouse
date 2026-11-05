@@ -1,15 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
+import { submitInquiryAction } from '@/app/actions/inquiries';
 
 export default function ContactForm() {
   const [form, setForm]       = useState({ name: '', phone: '', email: '', message: '' });
   const [submitted, setSubmit] = useState(false);
+  const [pending, startTransition] = useTransition();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmit(true);
+    startTransition(async () => {
+      await submitInquiryAction({
+        type: 'contact',
+        name: form.name,
+        email: form.email,
+        phone: form.phone || undefined,
+        message: form.message,
+      });
+      setSubmit(true);
+    });
   }
 
   const inputClass =
@@ -74,10 +85,11 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#f3c41b] text-[#0f0f0f] font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-[#e8b818] transition-colors"
+        disabled={pending}
+        className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#f3c41b] text-[#0f0f0f] font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-[#e8b818] transition-colors disabled:opacity-50"
       >
         <Send className="w-4 h-4" />
-        Send Message
+        {pending ? 'Sending…' : 'Send Message'}
       </button>
     </form>
   );

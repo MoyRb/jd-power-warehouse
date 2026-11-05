@@ -316,7 +316,7 @@ export class MockAdapter implements DataAdapter {
       id,
       type: data.type,
       name: data.name,
-      email: data.email,
+      email: data.email ?? null,
       phone: data.phone ?? null,
       message: data.message,
       item_name: data.item_name ?? null,

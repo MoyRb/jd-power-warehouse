@@ -69,7 +69,7 @@ export interface Inquiry {
   id: string
   type: InquiryType
   name: string
-  email: string
+  email: string | null
   phone: string | null
   message: string
   item_name: string | null
@@ -126,13 +126,14 @@ export type UpdateCategoryInput = Partial<CreateCategoryInput>
 export interface CreateInquiryInput {
   type: InquiryType
   name: string
-  email: string
-  phone?: string
+  email?: string | null
+  phone?: string | null
   message: string
-  item_name?: string
-  item_description?: string
-  item_condition?: string
-  asking_price?: number
+  item_name?: string | null
+  item_description?: string | null
+  item_condition?: string | null
+  asking_price?: number | null
+  ip_hash?: string | null
 }
 
 export interface ImageFile {

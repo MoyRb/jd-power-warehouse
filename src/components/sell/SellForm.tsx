@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useTransition } from 'react';
 import { Upload, DollarSign, CheckCircle } from 'lucide-react';
+import { submitInquiryAction } from '@/app/actions/inquiries';
 
 interface FormData {
   fullName: string;
@@ -28,6 +29,7 @@ export default function SellForm() {
   const [files, setFiles]       = useState<File[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [pending, startTransition] = useTransition();
   const fileInputRef            = useRef<HTMLInputElement>(null);
 
   function handleChange(field: keyof FormData, value: string) {
@@ -50,8 +52,22 @@ export default function SellForm() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Demo: no real submission
-    setSubmitted(true);
+    // Note: file attachments (images) are captured in component state only.
+    // Supabase Storage integration for sell request images is PENDING — see ADMIN_BACKLOG.md.
+    const askingPriceNum = parseFloat(form.askingPrice);
+    startTransition(async () => {
+      await submitInquiryAction({
+        type: 'sell_request',
+        name: form.fullName,
+        email: form.email,
+        phone: form.phone || undefined,
+        message: form.description || 'No description provided',
+        item_name: form.itemName,
+        item_condition: form.condition,
+        asking_price: isNaN(askingPriceNum) ? undefined : askingPriceNum,
+      });
+      setSubmitted(true);
+    });
   }
 
   if (submitted) {
@@ -215,9 +231,10 @@ export default function SellForm() {
 
       <button
         type="submit"
-        className="w-full bg-[#f3c41b] text-[#0f0f0f] font-black text-sm py-4 rounded-xl hover:bg-[#e8b818] transition-colors tracking-wide"
+        disabled={pending}
+        className="w-full bg-[#f3c41b] text-[#0f0f0f] font-black text-sm py-4 rounded-xl hover:bg-[#e8b818] transition-colors tracking-wide disabled:opacity-50"
       >
-        Submit for Review
+        {pending ? 'Submitting…' : 'Submit for Review'}
       </button>
     </form>
   );

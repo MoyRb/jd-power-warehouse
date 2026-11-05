@@ -1,7 +1,16 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { CreateProductSchema, UpdateProductSchema } from '../../src/lib/validations/product'
 import { CreateInquirySchema } from '../../src/lib/validations/inquiry'
 import { AdjustInventorySchema } from '../../src/lib/validations/inventory'
+
+vi.mock('next/headers', () => ({
+  headers: () => ({ get: () => '192.0.2.1' }),
+}))
+
+const mockCreateInquiry = vi.fn().mockResolvedValue({ id: 'mock' })
+vi.mock('../../src/lib/db', () => ({
+  db: { createInquiry: (...args: unknown[]) => mockCreateInquiry(...args) },
+}))
 
 describe('CreateProductSchema', () => {
   it('rejects negative price', () => {
@@ -133,5 +142,29 @@ describe('AdjustInventorySchema', () => {
       reason: 'huge deduction',
     })
     expect(result.success).toBe(false)
+  })
+})
+
+describe('submitInquiryAction rate limiting', () => {
+  beforeEach(() => {
+    mockCreateInquiry.mockClear()
+  })
+
+  it('returns success:true on each call even when rate-limited (silent)', async () => {
+    // Dynamic import ensures fresh module per test suite run; avoids stale rateLimitMap
+    const { submitInquiryAction } = await import('../../src/app/actions/inquiries')
+    const payload = {
+      type: 'quick_inquiry' as const,
+      name: 'Test User',
+      message: 'Hello',
+    }
+    const results = []
+    for (let i = 0; i < 6; i++) {
+      results.push(await submitInquiryAction(payload))
+    }
+    // All calls must silently succeed (never expose error to client)
+    expect(results.every((r) => r.success === true)).toBe(true)
+    // First 5 calls should reach the DB, 6th is rate-limited silently
+    expect(mockCreateInquiry).toHaveBeenCalledTimes(5)
   })
 })
