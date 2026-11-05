@@ -108,12 +108,30 @@ describe('AdjustInventorySchema', () => {
     expect(result.success).toBe(false)
   })
 
-  it('accepts negative integer delta', () => {
+  it('accepts negative integer delta within bounds', () => {
     const result = AdjustInventorySchema.safeParse({
       product_id: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
       delta: -3,
       reason: 'sold',
     })
     expect(result.success).toBe(true)
+  })
+
+  it('rejects delta exceeding +10000', () => {
+    const result = AdjustInventorySchema.safeParse({
+      product_id: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+      delta: 10001,
+      reason: 'huge restock',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('rejects delta below -10000', () => {
+    const result = AdjustInventorySchema.safeParse({
+      product_id: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+      delta: -10001,
+      reason: 'huge deduction',
+    })
+    expect(result.success).toBe(false)
   })
 })

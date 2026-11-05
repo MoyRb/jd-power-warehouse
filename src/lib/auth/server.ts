@@ -8,7 +8,9 @@ export interface AdminSession {
   role: AdminRole
 }
 
-// Mock dev session — only active when no Supabase env vars and not in production
+// Mock dev session — ONLY active when ADMIN_DEV_BYPASS=true is explicitly set.
+// Never relies on NODE_ENV: that value is controlled by the deployment
+// environment and cannot be used as a security gate.
 const DEV_SESSION: AdminSession = {
   userId: 'mock-admin-id',
   role: 'admin',
@@ -16,6 +18,13 @@ const DEV_SESSION: AdminSession = {
 
 function isSupabaseConfigured(): boolean {
   return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL)
+}
+
+// Dev bypass: requires an explicit opt-in env var — never inferred from NODE_ENV.
+// Set ADMIN_DEV_BYPASS=true only in .env.local on a developer's machine.
+// This variable must never be set in staging, preview, or production environments.
+function isDevBypassEnabled(): boolean {
+  return process.env.ADMIN_DEV_BYPASS === 'true'
 }
 
 export async function createServerSupabaseClient() {
@@ -43,12 +52,12 @@ export async function createServerSupabaseClient() {
 }
 
 export async function getAdminSession(): Promise<AdminSession | null> {
-  // Dev mode: return mock session when Supabase is not configured
+  // Dev bypass: requires explicit opt-in — never inferred from NODE_ENV
   if (!isSupabaseConfigured()) {
-    if (process.env.NODE_ENV === 'production') {
-      return null
+    if (isDevBypassEnabled()) {
+      return DEV_SESSION
     }
-    return DEV_SESSION
+    return null
   }
 
   try {

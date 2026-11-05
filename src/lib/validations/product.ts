@@ -8,7 +8,7 @@ export const CreateProductSchema = z.object({
   category_id: z.string().uuid().optional().nullable(),
   status: z.enum(['draft', 'published', 'archived']),
   badge: z.enum(['Sale', 'New']).optional().nullable(),
-  sku: z.string().max(100).optional().nullable(),
+  sku: z.string().min(1).max(100).optional().nullable(),
 })
 
 export const UpdateProductSchema = CreateProductSchema.partial()

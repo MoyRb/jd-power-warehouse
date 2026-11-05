@@ -36,25 +36,23 @@ describe('getAdminSession', () => {
     vi.resetModules()
   })
 
-  it('returns dev session in mock mode (no SUPABASE env vars, NODE_ENV=test)', async () => {
+  it('returns dev session when ADMIN_DEV_BYPASS=true and no SUPABASE env vars', async () => {
     delete process.env.NEXT_PUBLIC_SUPABASE_URL
+    process.env.ADMIN_DEV_BYPASS = 'true'
     const { getAdminSession } = await import('../../src/lib/auth/server')
     const session = await getAdminSession()
     expect(session).not.toBeNull()
     expect(session?.userId).toBe('mock-admin-id')
     expect(session?.role).toBe('admin')
+    delete process.env.ADMIN_DEV_BYPASS
   })
 
-  it('returns null when no SUPABASE env vars and NODE_ENV is production', async () => {
+  it('returns null when no SUPABASE env vars and ADMIN_DEV_BYPASS is not set', async () => {
     delete process.env.NEXT_PUBLIC_SUPABASE_URL
-    const original = process.env.NODE_ENV
-    // @ts-expect-error — overriding read-only env for test
-    process.env.NODE_ENV = 'production'
+    delete process.env.ADMIN_DEV_BYPASS
     const { getAdminSession } = await import('../../src/lib/auth/server')
     const session = await getAdminSession()
     expect(session).toBeNull()
-    // @ts-expect-error
-    process.env.NODE_ENV = original
   })
 })
 
@@ -64,18 +62,17 @@ describe('requireAdmin', () => {
     delete process.env.NEXT_PUBLIC_SUPABASE_URL
   })
 
-  it('returns session in mock dev mode', async () => {
+  it('returns session when ADMIN_DEV_BYPASS=true', async () => {
+    process.env.ADMIN_DEV_BYPASS = 'true'
     const { requireAdmin } = await import('../../src/lib/auth/server')
     const session = await requireAdmin()
     expect(session.userId).toBe('mock-admin-id')
+    delete process.env.ADMIN_DEV_BYPASS
   })
 
-  it('throws redirect in production with no session', async () => {
-    // @ts-expect-error
-    process.env.NODE_ENV = 'production'
+  it('throws redirect when ADMIN_DEV_BYPASS not set and no Supabase', async () => {
+    delete process.env.ADMIN_DEV_BYPASS
     const { requireAdmin } = await import('../../src/lib/auth/server')
     await expect(requireAdmin()).rejects.toThrow('REDIRECT:/admin/login')
-    // @ts-expect-error
-    process.env.NODE_ENV = 'test'
   })
 })

@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const AdjustInventorySchema = z.object({
   product_id: z.string().uuid(),
-  delta: z.number().int('Delta must be an integer'),
+  delta: z.number().int('Delta must be an integer').min(-10000).max(10000),
   reason: z.string().min(1).max(500),
 })
 
