@@ -52,11 +52,16 @@ export async function createServerSupabaseClient() {
 }
 
 export async function getAdminSession(): Promise<AdminSession | null> {
-  // Dev bypass: requires explicit opt-in — never inferred from NODE_ENV
+  // Dev bypass: explicit opt-in. Valid only when the mock session cookie is present.
+  // The cookie is set by loginAction and cleared by logoutAction.
+  // Clearing browser cookies invalidates the session, allowing auth tests to work correctly.
+  if (isDevBypassEnabled()) {
+    const cookieStore = await cookies()
+    const devSession = cookieStore.get('jdpw_dev_admin')
+    return devSession?.value === 'true' ? DEV_SESSION : null
+  }
+
   if (!isSupabaseConfigured()) {
-    if (isDevBypassEnabled()) {
-      return DEV_SESSION
-    }
     return null
   }
 

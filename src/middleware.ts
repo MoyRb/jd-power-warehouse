@@ -9,13 +9,18 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // If Supabase is not configured:
-  // - Allow access only when ADMIN_DEV_BYPASS=true is explicitly set.
-  // - Never infer bypass from NODE_ENV (staging/preview may have NODE_ENV=development).
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    if (process.env.ADMIN_DEV_BYPASS === 'true') {
+  // Dev bypass: explicit opt-in. Session validated via mock cookie set during login.
+  // Set ADMIN_DEV_BYPASS=true only in .env.local — never in staging/production.
+  if (process.env.ADMIN_DEV_BYPASS === 'true') {
+    const devSession = request.cookies.get('jdpw_dev_admin')
+    if (devSession?.value === 'true') {
       return NextResponse.next()
     }
+    return NextResponse.redirect(new URL('/admin/login', request.url))
+  }
+
+  // If Supabase is not configured, block access
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
     return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 

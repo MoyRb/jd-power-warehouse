@@ -7,6 +7,9 @@ vi.mock('next/headers', () => ({
   cookies: () => ({
     getAll: () => [],
     set: vi.fn(),
+    delete: vi.fn(),
+    get: (name: string) =>
+      name === 'jdpw_dev_admin' ? { value: 'true' } : undefined,
   }),
 }))
 

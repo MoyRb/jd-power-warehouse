@@ -10,11 +10,20 @@ export async function loginAction(formData: FormData): Promise<void> {
     redirect('/admin/login?error=missing_fields')
   }
 
-  // Dev bypass: when ADMIN_DEV_BYPASS=true and no Supabase, accept any credentials
+  // Dev bypass: when ADMIN_DEV_BYPASS=true, accept any credentials and set a mock session cookie
+  if (process.env.ADMIN_DEV_BYPASS === 'true') {
+    const { cookies } = await import('next/headers')
+    const cookieStore = await cookies()
+    cookieStore.set('jdpw_dev_admin', 'true', {
+      httpOnly: true,
+      path: '/admin',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24,
+    })
+    redirect('/admin')
+  }
+
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    if (process.env.ADMIN_DEV_BYPASS === 'true') {
-      redirect('/admin')
-    }
     redirect('/admin/login?error=not_configured')
   }
 
@@ -31,7 +40,11 @@ export async function loginAction(formData: FormData): Promise<void> {
 }
 
 export async function logoutAction(): Promise<void> {
-  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  if (process.env.ADMIN_DEV_BYPASS === 'true') {
+    const { cookies } = await import('next/headers')
+    const cookieStore = await cookies()
+    cookieStore.delete('jdpw_dev_admin')
+  } else if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
     const { createServerSupabaseClient } = await import('@/lib/auth/server')
     const supabase = await createServerSupabaseClient()
     await supabase.auth.signOut()

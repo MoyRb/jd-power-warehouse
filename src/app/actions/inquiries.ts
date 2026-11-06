@@ -12,10 +12,9 @@ const rateLimitMap = new Map<string, number[]>()
 const RATE_LIMIT_MAX = 5
 const RATE_LIMIT_WINDOW_MS = 60_000
 
-function getIpHash(): string {
-  const headersList = headers()
+async function getIpHash(): Promise<string> {
+  const headersList = await headers()
   const ip =
-    // @ts-expect-error — Next.js headers() returns ReadonlyHeaders; get() exists at runtime
     headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '0.0.0.0'
   return createHash('sha256').update(ip).digest('hex')
 }
@@ -37,7 +36,7 @@ export async function submitInquiryAction(
   const result = CreateInquirySchema.safeParse(data)
   if (!result.success) return { success: true }
 
-  const ipHash = getIpHash()
+  const ipHash = await getIpHash()
 
   // Rate limit — silent
   if (isRateLimited(ipHash)) return { success: true }
