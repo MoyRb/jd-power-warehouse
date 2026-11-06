@@ -55,3 +55,6 @@ coverage/
 
 # Local temporary files
 *.log
+
+# Supabase CLI temporary files
+supabase/.temp/
