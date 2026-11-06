@@ -31,6 +31,13 @@ vi.mock('@supabase/ssr', () => ({
   }),
 }))
 
+vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }))
+
+const mockSetProductStatus = vi.fn()
+vi.mock('../../src/lib/db', () => ({
+  db: { setProductStatus: (...args: unknown[]) => mockSetProductStatus(...args) },
+}))
+
 describe('getAdminSession', () => {
   beforeEach(() => {
     vi.resetModules()
@@ -74,5 +81,23 @@ describe('requireAdmin', () => {
     delete process.env.ADMIN_DEV_BYPASS
     const { requireAdmin } = await import('../../src/lib/auth/server')
     await expect(requireAdmin()).rejects.toThrow('REDIRECT:/admin/login')
+  })
+})
+
+describe('Server Action auth guard (Review Focus #1)', () => {
+  beforeEach(() => {
+    vi.resetModules()
+    delete process.env.NEXT_PUBLIC_SUPABASE_URL
+    delete process.env.ADMIN_DEV_BYPASS
+    mockSetProductStatus.mockClear()
+  })
+
+  it('setProductStatusAction without session throws redirect to /admin/login', async () => {
+    const { setProductStatusAction } = await import('../../src/app/admin/_actions/products')
+    await expect(setProductStatusAction('some-id', 'published')).rejects.toThrow(
+      'REDIRECT:/admin/login',
+    )
+    // db.setProductStatus must NOT have been called
+    expect(mockSetProductStatus).not.toHaveBeenCalled()
   })
 })
