@@ -1,7 +1,7 @@
 # Development Progress
 
 ## Phase
-3 — Asset integration complete. Real images from reference site integrated throughout.
+4 — Corte 2 complete. Admin panel + backend fully implemented with MockAdapter. Ready for Supabase connection.
 
 ## Completed
 - Initial project scaffolding (Next.js 16, TypeScript, Tailwind v4, Supabase).
@@ -67,12 +67,39 @@
 - Real product images and hero photo?
 - Logo SVG asset?
 
-## Blockers
-- None. All public screens verified.
+## Corte 2 — Admin Panel + Backend (2026-11-05)
 
-## Next safe task
-Phase 4: Connect Supabase for real product data, or resolve open questions above.
+### What was built
+- **SQL schema**: 7 tables (products, categories, product_images, inventory_log, inquiries, store_settings, admin_users) + RLS policies + indexes + seed data (`supabase/migrations/`)
+- **DataAdapter pattern**: `MockAdapter` (in-memory, fully functional) + `SupabaseAdapter` stub ready to wire
+- **Auth**: middleware + `requireAdmin()` + `getAdminSession()` + `ADMIN_DEV_BYPASS` dev mode via cookie
+- **Admin panel** (`/admin`): dashboard, products table, product create/edit, image uploader, categories, inventory, inquiries inbox, settings
+- **Public shop**: reads from DataAdapter, replaces static data import
+- **Forms wired**: Quick Inquiry, Contact, Sell forms submit to `submitInquiryAction` with in-memory rate limiting
+- **Tests**: 35 Vitest unit tests + 18 Playwright E2E tests (all pass)
+
+### Key architectural decisions
+- `ADMIN_DEV_BYPASS=true` activates mock session via `jdpw_dev_admin` cookie (clears on logout; cookie required so unauthenticated tests still work)
+- `ADMIN_DEV_BYPASS=true` also forces MockAdapter even when `NEXT_PUBLIC_SUPABASE_URL` is set
+- Route group `(protected)` isolates admin layout from login page to avoid redirect loop
+- `export const instant = false` for dynamic rendering (instead of `revalidate`/`dynamic`, incompatible with `cacheComponents: true`)
+
+### Blockers
+- None. All 18 E2E + 35 unit tests pass. Build is clean.
+
+### Next safe task
+Corte 3: Connect real Supabase project — add env vars to `.env.local`, run `supabase db push`, confirm SupabaseAdapter works end-to-end.
+
+### Open Questions (pending business decision)
+- Cart vs WhatsApp-first purchase flow?
+- EN/ES i18n from start?
+- B2B customer account management in scope for Corte 3?
+
+### Deferred items (non-blocking)
+- Sell-form image attachments → requires Supabase Storage bucket
+- AnnouncementBar text reading from `store_settings` DB (currently hardcoded)
+- Admin notifications (email on new inquiry)
 
 ## Session handoff
-Session 2026-10-26: Visual reconstruction complete. See evidence/local/ for comparative screenshots.
-All lint/TypeScript/build checks pass. Local server verified at http://localhost:3001.
+Session 2026-11-05: Corte 2 complete. All tests pass. Dev server: `ADMIN_DEV_BYPASS=true npm run dev -- --port 3001`.
+Admin login at http://localhost:3001/admin/login — any email/password accepted in dev mode.

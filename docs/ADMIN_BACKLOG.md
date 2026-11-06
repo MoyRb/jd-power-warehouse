@@ -1,7 +1,7 @@
 # JD Power Warehouse — Admin Backlog
 
 Date: 2026-11-05
-Phase: Corte 2 — in progress
+Phase: Corte 2 — COMPLETE
 
 ---
 
@@ -20,29 +20,29 @@ Phase: Corte 2 — in progress
 
 ### Block 1: Foundation (Tasks 1–4)
 - [x] Task 1: docs/ADMIN_AUDIT.md, ADMIN_ARCHITECTURE.md, ADMIN_BACKLOG.md
-- [ ] Task 2: SQL migrations (001_initial_schema, 002_rls_policies, 003_indexes, seed)
-- [ ] Task 3: DB types, DataAdapter interface, MockAdapter, SupabaseAdapter stub
-- [ ] Task 4: Zod schemas, auth utilities, Next.js middleware
+- [x] Task 2: SQL migrations (001_initial_schema, 002_rls_policies, 003_indexes, seed)
+- [x] Task 3: DB types, DataAdapter interface, MockAdapter, SupabaseAdapter stub
+- [x] Task 4: Zod schemas, auth utilities, Next.js middleware
 
 ### Block 2: Admin Panel (Tasks 5–13)
-- [ ] Task 5: Admin layout, sidebar, login/logout
-- [ ] Task 6: Dashboard (stats cards)
-- [ ] Task 7: Products table + status management
-- [ ] Task 8: Product create/edit form
-- [ ] Task 9: Image uploader with server-side validation
-- [ ] Task 10: Categories management
-- [ ] Task 11: Inventory management
-- [ ] Task 12: Inquiries inbox
-- [ ] Task 13: Settings page
+- [x] Task 5: Admin layout, sidebar, login/logout
+- [x] Task 6: Dashboard (stats cards)
+- [x] Task 7: Products table + status management
+- [x] Task 8: Product create/edit form
+- [x] Task 9: Image uploader with server-side validation
+- [x] Task 10: Categories management
+- [x] Task 11: Inventory management
+- [x] Task 12: Inquiries inbox
+- [x] Task 13: Settings page
 
 ### Block 3: Integration (Tasks 14–15)
-- [ ] Task 14: Wire Quick Inquiry + Contact + Sell forms to inquiries DB
-- [ ] Task 15: Public shop reads from DataAdapter (replace static import)
+- [x] Task 14: Wire Quick Inquiry + Contact + Sell forms to inquiries DB
+- [x] Task 15: Public shop reads from DataAdapter (replace static import)
 
 ### Block 4: QA (Tasks 16–18)
-- [ ] Task 16: Vitest unit tests (adapter, validations, auth guards)
-- [ ] Task 17: Playwright e2e tests (auth, CRUD, public sync, forms)
-- [ ] Task 18: Final documentation + PROGRESS.md update
+- [x] Task 16: Vitest unit tests (adapter, validations, auth guards) — 35 tests pass
+- [x] Task 17: Playwright e2e tests (auth, CRUD, public sync, forms) — 18/18 pass
+- [x] Task 18: Final documentation + PROGRESS.md update
 
 ---
 
