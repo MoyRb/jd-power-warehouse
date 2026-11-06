@@ -2,6 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import type { AdminRole } from '../db/types'
+import { isDevBypassEnabled } from '../dev-bypass'
 
 export interface AdminSession {
   userId: string
@@ -18,13 +19,6 @@ const DEV_SESSION: AdminSession = {
 
 function isSupabaseConfigured(): boolean {
   return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL)
-}
-
-// Dev bypass: requires an explicit opt-in env var — never inferred from NODE_ENV.
-// Set ADMIN_DEV_BYPASS=true only in .env.local on a developer's machine.
-// This variable must never be set in staging, preview, or production environments.
-function isDevBypassEnabled(): boolean {
-  return process.env.ADMIN_DEV_BYPASS === 'true'
 }
 
 export async function createServerSupabaseClient() {

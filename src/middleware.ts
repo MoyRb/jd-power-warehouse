@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { isDevBypassEnabled } from './lib/dev-bypass'
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -9,9 +10,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Dev bypass: explicit opt-in. Session validated via mock cookie set during login.
-  // Set ADMIN_DEV_BYPASS=true only in .env.local — never in staging/production.
-  if (process.env.ADMIN_DEV_BYPASS === 'true') {
+  // Dev bypass: active only when NODE_ENV !== 'production' AND ADMIN_DEV_BYPASS=true.
+  // Session further validated via mock cookie set during login.
+  if (isDevBypassEnabled()) {
     const devSession = request.cookies.get('jdpw_dev_admin')
     if (devSession?.value === 'true') {
       return NextResponse.next()

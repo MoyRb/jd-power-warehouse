@@ -168,11 +168,24 @@ CREATE POLICY audit_log_admin_read
 -- ---------------------------------------------------------------------------
 -- store_settings
 -- ---------------------------------------------------------------------------
+-- Anon SELECT: replaced in migration 004 with is_public=true filter.
+-- Defined here (permissive) so the app can read settings before 004 runs.
 CREATE POLICY store_settings_anon_read
   ON store_settings FOR SELECT
   USING (true);
 
-CREATE POLICY store_settings_admin_write
-  ON store_settings FOR ALL
+-- Admin write: principle of least privilege — SELECT, INSERT, UPDATE only.
+-- DELETE is intentionally omitted: settings keys are permanent; use UPDATE
+-- to clear values. No application code path issues a DELETE on this table.
+CREATE POLICY store_settings_admin_select
+  ON store_settings FOR SELECT
+  USING (is_admin());
+
+CREATE POLICY store_settings_admin_insert
+  ON store_settings FOR INSERT
+  WITH CHECK (is_admin());
+
+CREATE POLICY store_settings_admin_update
+  ON store_settings FOR UPDATE
   USING (is_admin())
   WITH CHECK (is_admin());

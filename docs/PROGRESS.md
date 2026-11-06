@@ -100,6 +100,41 @@ Corte 3: Connect real Supabase project — add env vars to `.env.local`, run `su
 - AnnouncementBar text reading from `store_settings` DB (currently hardcoded)
 - Admin notifications (email on new inquiry)
 
+## Pre-migration security hardening (2026-11-06)
+
+### Corrections applied before JDHOUSE migration push
+
+**Finding 1 — store_settings RLS over-privilege (resolved)**
+- `migration 002` previously had a single `FOR ALL` admin policy on `store_settings` which silently allowed DELETE.
+- Replaced with three explicit policies: `SELECT`, `INSERT`, `UPDATE`. DELETE is intentionally absent.
+- Principle of least privilege: settings keys are permanent; `UPDATE` is the correct way to clear a value.
+
+**Finding 2 — ADMIN_DEV_BYPASS production leak (resolved)**
+- `isDevBypassEnabled()` previously checked only `ADMIN_DEV_BYPASS === 'true'`.
+- Added `NODE_ENV !== 'production'` as a structural guard: Next.js always sets `NODE_ENV=production` during `next build`/`next start`, so the bypass cannot activate even if the env var is accidentally propagated.
+- Centralized into `src/lib/dev-bypass.ts` — single source of truth consumed by middleware, auth/server, login/actions, db/index.
+- 4 new production-blocking unit tests added to `tests/unit/auth-guard.test.ts`.
+- 2 new application-level tests added to `tests/unit/settings-actions.test.ts`.
+
+### Validation results (2026-11-06)
+- TypeScript strict: 0 errors (`npx tsc --noEmit`)
+- ESLint: 0 errors (`npx eslint src`)
+- Vitest unit: 41/41 pass
+- Next.js build: clean (22/22 routes)
+- `supabase db push --dry-run --remote`: 4 migrations queued for JDHOUSE (kodjmkykwnghknwlpzsi)
+
+### JDHOUSE migration push — ready
+Command to execute when ready:
+```
+npx supabase db push --remote
+```
+Migrations in order:
+1. `20261106150000_initial_schema.sql`
+2. `20261106150001_rls_policies.sql` (store_settings min-privilege, hardened is_admin SECURITY DEFINER)
+3. `20261106150002_indexes.sql`
+4. `20261106150003_security_fixes.sql`
+
 ## Session handoff
-Session 2026-11-05: Corte 2 complete. All tests pass. Dev server: `ADMIN_DEV_BYPASS=true npm run dev -- --port 3001`.
+Session 2026-11-06: Pre-migration hardening complete. All 41 unit tests + build pass.
+Dev server: `ADMIN_DEV_BYPASS=true npm run dev -- --port 3001`.
 Admin login at http://localhost:3001/admin/login — any email/password accepted in dev mode.

@@ -1,6 +1,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { isDevBypassEnabled } from '@/lib/dev-bypass'
 
 export async function loginAction(formData: FormData): Promise<void> {
   const email = (formData.get('email') as string | null) ?? ''
@@ -10,8 +11,8 @@ export async function loginAction(formData: FormData): Promise<void> {
     redirect('/admin/login?error=missing_fields')
   }
 
-  // Dev bypass: when ADMIN_DEV_BYPASS=true, accept any credentials and set a mock session cookie
-  if (process.env.ADMIN_DEV_BYPASS === 'true') {
+  // Dev bypass: only active outside production. Accepts any credentials and sets a mock session cookie.
+  if (isDevBypassEnabled()) {
     const { cookies } = await import('next/headers')
     const cookieStore = await cookies()
     cookieStore.set('jdpw_dev_admin', 'true', {
@@ -40,7 +41,7 @@ export async function loginAction(formData: FormData): Promise<void> {
 }
 
 export async function logoutAction(): Promise<void> {
-  if (process.env.ADMIN_DEV_BYPASS === 'true') {
+  if (isDevBypassEnabled()) {
     const { cookies } = await import('next/headers')
     const cookieStore = await cookies()
     cookieStore.delete('jdpw_dev_admin')

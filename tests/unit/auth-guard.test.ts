@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 // auth/server.ts uses next/headers and next/navigation which aren't available in Vitest.
 // We test the exported logic by mocking these dependencies.
@@ -101,6 +101,59 @@ describe('Server Action auth guard (Review Focus #1)', () => {
       'REDIRECT:/admin/login',
     )
     // db.setProductStatus must NOT have been called
+    expect(mockSetProductStatus).not.toHaveBeenCalled()
+  })
+})
+
+// ---- Hardening: bypass must be blocked in production ----
+
+describe('production bypass hardening', () => {
+  const originalNodeEnv = process.env.NODE_ENV
+
+  beforeEach(() => {
+    vi.resetModules()
+    delete process.env.NEXT_PUBLIC_SUPABASE_URL
+  })
+
+  afterEach(() => {
+    ;(process.env as Record<string, string>).NODE_ENV = originalNodeEnv
+    delete process.env.ADMIN_DEV_BYPASS
+  })
+
+  it('getAdminSession returns null when NODE_ENV=production even with ADMIN_DEV_BYPASS=true', async () => {
+    ;(process.env as Record<string, string>).NODE_ENV = 'production'
+    process.env.ADMIN_DEV_BYPASS = 'true'
+    const { getAdminSession } = await import('../../src/lib/auth/server')
+    const session = await getAdminSession()
+    expect(session).toBeNull()
+  })
+
+  it('requireAdmin throws redirect when NODE_ENV=production even with ADMIN_DEV_BYPASS=true', async () => {
+    ;(process.env as Record<string, string>).NODE_ENV = 'production'
+    process.env.ADMIN_DEV_BYPASS = 'true'
+    const { requireAdmin } = await import('../../src/lib/auth/server')
+    await expect(requireAdmin()).rejects.toThrow('REDIRECT:/admin/login')
+  })
+
+  it('getAdminSession returns null when jdpw_dev_admin cookie is present but bypass is production-blocked', async () => {
+    // Verifies that a forged cookie cannot grant admin access in production.
+    // The cookies() mock always returns jdpw_dev_admin=true, so if the bypass
+    // code path were reached, it would incorrectly return a session.
+    ;(process.env as Record<string, string>).NODE_ENV = 'production'
+    process.env.ADMIN_DEV_BYPASS = 'true'
+    const { getAdminSession } = await import('../../src/lib/auth/server')
+    const session = await getAdminSession()
+    expect(session).toBeNull()
+  })
+
+  it('setProductStatusAction throws redirect when NODE_ENV=production and ADMIN_DEV_BYPASS=true', async () => {
+    ;(process.env as Record<string, string>).NODE_ENV = 'production'
+    process.env.ADMIN_DEV_BYPASS = 'true'
+    mockSetProductStatus.mockClear()
+    const { setProductStatusAction } = await import('../../src/app/admin/_actions/products')
+    await expect(setProductStatusAction('some-id', 'published')).rejects.toThrow(
+      'REDIRECT:/admin/login',
+    )
     expect(mockSetProductStatus).not.toHaveBeenCalled()
   })
 })
