@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
+import { headers } from 'next/headers';
 import ShopClient from '@/components/shop/ShopClient';
 import Footer from '@/components/layout/Footer';
+import { db } from '@/lib/db';
+
+export const instant = false;
 
 export const metadata: Metadata = {
   title: 'Shop Liquidation Inventory | JD Power Warehouse Plainfield IL',
@@ -9,7 +13,15 @@ export const metadata: Metadata = {
     'Browse tools, lawn equipment, grills, and outdoor patio sets up to 70% off retail prices. Local pickup in Plainfield, IL or instant WhatsApp reservation.',
 };
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  // headers() opts this route into dynamic rendering so it's never statically prerendered
+  await headers();
+
+  const [productsResult, categories] = await Promise.all([
+    db.listProducts({ status: 'published' }),
+    db.listCategories(),
+  ]);
+
   return (
     <>
       <Suspense fallback={
@@ -22,7 +34,7 @@ export default function ShopPage() {
           </div>
         </div>
       }>
-        <ShopClient />
+        <ShopClient products={productsResult.data} categories={categories} />
       </Suspense>
       <Footer compact />
     </>

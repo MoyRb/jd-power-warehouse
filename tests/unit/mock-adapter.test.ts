@@ -106,6 +106,17 @@ describe('MockAdapter', () => {
     expect(typeof result.data[0].quantity).toBe('number')
   })
 
+  it('listProducts({ status: published }) returns empty when all products are archived', async () => {
+    // Archive all products
+    const all = await adapter.listProducts()
+    for (const p of all.data) {
+      await adapter.setProductStatus(p.id, 'archived')
+    }
+    const result = await adapter.listProducts({ status: 'published' })
+    expect(result.data).toEqual([])
+    expect(result.total).toBe(0)
+  })
+
   it('uploadImage rejects file with type application/javascript', async () => {
     const all = await adapter.listProducts()
     const productId = all.data[0].id

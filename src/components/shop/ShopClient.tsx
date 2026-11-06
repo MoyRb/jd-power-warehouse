@@ -4,8 +4,14 @@ import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Search, ShoppingCart, SlidersHorizontal } from 'lucide-react';
-import { products, type ProductCategory } from '@/data/products';
+import type { Product, Category } from '@/lib/db/types';
 import { formatPrice } from '@/lib/utils';
+import { getProductImageSrc } from '@/lib/product-image';
+
+interface ShopClientProps {
+  products: Product[]
+  categories: Category[]
+}
 
 const categoryColors: Record<string, string> = {
   Tools:              'from-amber-950/80 to-yellow-950/40',
@@ -25,12 +31,13 @@ const categoryEmoji: Record<string, string> = {
   Seasonal:           '⭐',
 };
 
-function ProductImage({ category, name, image }: { category: string; name: string; image?: string }) {
-  if (image) {
+function ProductImage({ categoryName, name, imagePath }: { categoryName: string; name: string; imagePath?: string | null }) {
+  const src = imagePath ? getProductImageSrc(imagePath) : null;
+  if (src) {
     return (
       <div className="w-full h-44 relative rounded-t-xl overflow-hidden bg-[#141414]">
         <Image
-          src={image}
+          src={src}
           alt={name}
           fill
           className="object-cover"
@@ -39,8 +46,8 @@ function ProductImage({ category, name, image }: { category: string; name: strin
       </div>
     );
   }
-  const grad = categoryColors[category] ?? 'from-zinc-900/80 to-neutral-900/40';
-  const emoji = categoryEmoji[category] ?? '📦';
+  const grad = categoryColors[categoryName] ?? 'from-zinc-900/80 to-neutral-900/40';
+  const emoji = categoryEmoji[categoryName] ?? '📦';
   return (
     <div className={`w-full h-44 bg-gradient-to-br ${grad} flex flex-col items-center justify-center gap-2 rounded-t-xl`}>
       <span className="text-4xl" aria-hidden="true">{emoji}</span>
@@ -57,17 +64,7 @@ const SORT_OPTIONS = [
   { value: 'price-desc', label: 'Price: High–Low' },
 ];
 
-const FILTER_CATEGORIES: (ProductCategory | 'All')[] = [
-  ALL_CATEGORIES,
-  'Tools',
-  'Outdoor',
-  'Landscaping',
-  'Grills',
-  'Home Improvement',
-  'Seasonal',
-];
-
-export default function ShopClient() {
+export default function ShopClient({ products, categories }: ShopClientProps) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') ?? ALL_CATEGORIES;
 
@@ -75,6 +72,8 @@ export default function ShopClient() {
   const [category, setCategory] = useState<string>(initialCategory);
   const [sort, setSort]         = useState('name-asc');
   const [cartCount, setCartCount] = useState(0);
+
+  const filterCategories = [ALL_CATEGORIES, ...categories.map((c) => c.name)];
 
   const filtered = useMemo(() => {
     let result = [...products];
@@ -84,12 +83,12 @@ export default function ShopClient() {
       result = result.filter(
         (p) =>
           p.name.toLowerCase().includes(q) ||
-          p.description.toLowerCase().includes(q),
+          (p.description ?? '').toLowerCase().includes(q),
       );
     }
 
     if (category !== ALL_CATEGORIES) {
-      result = result.filter((p) => p.category === category);
+      result = result.filter((p) => p.category?.name === category);
     }
 
     switch (sort) {
@@ -100,7 +99,7 @@ export default function ShopClient() {
     }
 
     return result;
-  }, [search, category, sort]);
+  }, [search, category, sort, products]);
 
   function addToCart() {
     setCartCount((n) => n + 1);
@@ -150,7 +149,7 @@ export default function ShopClient() {
           onChange={(e) => setCategory(e.target.value)}
           className="px-4 py-2.5 bg-[#141414] border border-[#2e2e2e] text-[#f6f4ee] rounded-xl text-sm focus:outline-none focus:border-[#f3c41b] min-w-[160px]"
         >
-          {FILTER_CATEGORIES.map((c) => (
+          {filterCategories.map((c) => (
             <option key={c} value={c}>{c === ALL_CATEGORIES ? 'All Categories' : c}</option>
           ))}
         </select>
@@ -179,55 +178,61 @@ export default function ShopClient() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {filtered.map((product) => (
-            <div
-              key={product.id}
-              className="bg-[#141414] border border-[#2e2e2e] rounded-xl overflow-hidden flex flex-col hover:border-[#f3c41b]/30 transition-colors group"
-            >
-              {/* Image */}
-              <div className="relative">
-                <ProductImage category={product.category} name={product.name} image={product.image} />
-                {/* Category badge */}
-                <span className="absolute top-2 left-2 bg-[#0a0a0a]/80 text-[#8c8c8c] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#2e2e2e] uppercase tracking-wider">
-                  {product.category}
-                </span>
-                {/* Sale/New badge */}
-                {product.badge && (
-                  <span className={`absolute top-2 right-2 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${
-                    product.badge === 'Sale'
-                      ? 'bg-red-600 text-white'
-                      : 'bg-[#f3c41b] text-[#0f0f0f]'
-                  }`}>
-                    {product.badge}
-                  </span>
-                )}
-              </div>
-
-              {/* Content */}
-              <div className="p-4 flex flex-col flex-1 gap-2">
-                <h3 className="text-[#f6f4ee] font-bold text-sm leading-tight line-clamp-2 group-hover:text-white transition-colors">
-                  {product.name}
-                </h3>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-[#f3c41b] font-black text-xl">{formatPrice(product.price)}</span>
-                  {product.originalPrice && (
-                    <span className="text-[#8c8c8c] text-xs line-through">{formatPrice(product.originalPrice)}</span>
+          {filtered.map((product) => {
+            const categoryName = product.category?.name ?? '';
+            const firstImage = product.images?.[0]?.storage_path ?? null;
+            return (
+              <div
+                key={product.id}
+                className="bg-[#141414] border border-[#2e2e2e] rounded-xl overflow-hidden flex flex-col hover:border-[#f3c41b]/30 transition-colors group"
+              >
+                {/* Image */}
+                <div className="relative">
+                  <ProductImage categoryName={categoryName} name={product.name} imagePath={firstImage} />
+                  {/* Category badge */}
+                  {categoryName && (
+                    <span className="absolute top-2 left-2 bg-[#0a0a0a]/80 text-[#8c8c8c] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#2e2e2e] uppercase tracking-wider">
+                      {categoryName}
+                    </span>
+                  )}
+                  {/* Sale/New badge */}
+                  {product.badge && (
+                    <span className={`absolute top-2 right-2 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                      product.badge === 'Sale'
+                        ? 'bg-red-600 text-white'
+                        : 'bg-[#f3c41b] text-[#0f0f0f]'
+                    }`}>
+                      {product.badge}
+                    </span>
                   )}
                 </div>
-                <p className="text-[#8c8c8c] text-xs leading-relaxed line-clamp-2 flex-1">
-                  {product.description}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => addToCart()}
-                  className="mt-2 w-full bg-[#f3c41b] text-[#0f0f0f] font-bold text-xs py-2.5 rounded-lg hover:bg-[#e8b818] transition-colors flex items-center justify-center gap-1.5"
-                >
-                  <span>+</span>
-                  <span>Add to Cart</span>
-                </button>
+
+                {/* Content */}
+                <div className="p-4 flex flex-col flex-1 gap-2">
+                  <h3 className="text-[#f6f4ee] font-bold text-sm leading-tight line-clamp-2 group-hover:text-white transition-colors">
+                    {product.name}
+                  </h3>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-[#f3c41b] font-black text-xl">{formatPrice(product.price)}</span>
+                    {product.original_price && (
+                      <span className="text-[#8c8c8c] text-xs line-through">{formatPrice(product.original_price)}</span>
+                    )}
+                  </div>
+                  <p className="text-[#8c8c8c] text-xs leading-relaxed line-clamp-2 flex-1">
+                    {product.description}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => addToCart()}
+                    className="mt-2 w-full bg-[#f3c41b] text-[#0f0f0f] font-bold text-xs py-2.5 rounded-lg hover:bg-[#e8b818] transition-colors flex items-center justify-center gap-1.5"
+                  >
+                    <span>+</span>
+                    <span>Add to Cart</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
