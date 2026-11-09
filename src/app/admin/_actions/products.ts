@@ -78,6 +78,8 @@ export async function updateProductAction(
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 const MAX_SIZE = 5 * 1024 * 1024
 
+const MAX_IMAGES_PER_PRODUCT = 10
+
 export async function uploadProductImageAction(
   productId: string,
   formData: FormData,
@@ -86,6 +88,11 @@ export async function uploadProductImageAction(
 
   const file = formData.get('file') as File | null
   if (!file) return { error: 'No file provided' }
+
+  const product = await db.getProduct(productId)
+  if ((product?.images?.length ?? 0) >= MAX_IMAGES_PER_PRODUCT) {
+    return { error: `Maximum ${MAX_IMAGES_PER_PRODUCT} images per product` }
+  }
 
   if (!ALLOWED_TYPES.includes(file.type)) {
     return { error: 'Only JPEG, PNG, and WebP images are allowed' }
@@ -127,4 +134,22 @@ export async function reorderImagesAction(
   await requireAdmin()
   await db.reorderImages(productId, imageIds)
   revalidatePath(`/admin/products/${productId}/edit`)
+}
+
+export async function updateImageAltTextAction(
+  imageId: string,
+  productId: string,
+  altText: string,
+): Promise<{ error?: string }> {
+  await requireAdmin()
+  const trimmed = altText.trim()
+  if (!trimmed) return { error: 'Alt text cannot be empty' }
+  if (trimmed.length > 200) return { error: 'Alt text must be 200 characters or fewer' }
+  try {
+    await db.updateImageAltText(imageId, productId, trimmed)
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : 'Failed to update alt text' }
+  }
+  revalidatePath(`/admin/products/${productId}/edit`)
+  return {}
 }

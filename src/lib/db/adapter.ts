@@ -56,6 +56,7 @@ export interface DataAdapter {
   uploadImage(productId: string, file: ImageFile): Promise<ProductImage>
   deleteImage(imageId: string): Promise<void>
   reorderImages(productId: string, imageIds: string[]): Promise<void>
+  updateImageAltText(imageId: string, productId: string, altText: string): Promise<void>
 
   // Analytics
   getProductStats(lowStockThreshold?: number): Promise<ProductStats>

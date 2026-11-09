@@ -142,4 +142,34 @@ describe('MockAdapter', () => {
       }),
     ).rejects.toThrow('FILE_TOO_LARGE')
   })
+
+  it('updateImageAltText updates alt text on the correct product image', async () => {
+    const all = await adapter.listProducts()
+    const productId = all.data[0].id
+    const img = await adapter.uploadImage(productId, {
+      name: 'test.jpg',
+      type: 'image/jpeg',
+      size: 1024,
+      buffer: Buffer.from(''),
+    })
+    await adapter.updateImageAltText(img.id, productId, 'New alt text')
+    const product = await adapter.getProduct(productId)
+    const updated = product?.images?.find((i) => i.id === img.id)
+    expect(updated?.alt_text).toBe('New alt text')
+  })
+
+  it('updateImageAltText throws when imageId does not belong to productId', async () => {
+    const all = await adapter.listProducts()
+    const p1 = all.data[0].id
+    const p2 = all.data[1].id
+    const img = await adapter.uploadImage(p1, {
+      name: 'test.jpg',
+      type: 'image/jpeg',
+      size: 1024,
+      buffer: Buffer.from(''),
+    })
+    await expect(
+      adapter.updateImageAltText(img.id, p2, 'hack')
+    ).rejects.toThrow('Image not found')
+  })
 })

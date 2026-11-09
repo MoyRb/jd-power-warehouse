@@ -427,13 +427,15 @@ export class SupabaseAdapter implements DataAdapter {
 
     const supabase = await this.getClient()
 
-    // Ensure bucket exists (idempotent)
-    const { error: bucketError } = await supabase.storage.createBucket(STORAGE_BUCKET, {
-      public: true,
-    })
-    // Ignore "already exists" error
-    if (bucketError && !bucketError.message.toLowerCase().includes('already exists')) {
-      throw new Error(bucketError.message)
+    // Ensure bucket exists — check first, only create when absent
+    const { data: existingBuckets, error: listError } = await supabase.storage.listBuckets()
+    if (listError) throw new Error(`Storage list error: ${listError.message}`)
+    const bucketExists = existingBuckets?.some((b: { name: string }) => b.name === STORAGE_BUCKET)
+    if (!bucketExists) {
+      const { error: createError } = await supabase.storage.createBucket(STORAGE_BUCKET, {
+        public: true,
+      })
+      if (createError) throw new Error(`Storage bucket creation failed: ${createError.message}`)
     }
 
     const imageId = randomUUID()
@@ -463,7 +465,11 @@ export class SupabaseAdapter implements DataAdapter {
       .select('*')
       .single()
 
-    if (insertError || !data) throw new Error(insertError?.message ?? 'uploadImage insert failed')
+    if (insertError || !data) {
+      // Compensatory delete — storagePath is scoped to this productId so only this file is removed
+      await supabase.storage.from(STORAGE_BUCKET).remove([storagePath])
+      throw new Error(insertError?.message ?? 'uploadImage insert failed')
+    }
     return data as ProductImage
   }
 
@@ -501,6 +507,16 @@ export class SupabaseAdapter implements DataAdapter {
           .eq('product_id', productId),
       ),
     )
+  }
+
+  async updateImageAltText(imageId: string, productId: string, altText: string): Promise<void> {
+    const supabase = await this.getClient()
+    const { error } = await supabase
+      .from('product_images')
+      .update({ alt_text: altText })
+      .eq('id', imageId)
+      .eq('product_id', productId)
+    if (error) throw new Error(error.message)
   }
 
   // ---------------------------------------------------------------------------

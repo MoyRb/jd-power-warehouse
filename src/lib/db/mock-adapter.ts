@@ -394,6 +394,14 @@ export class MockAdapter implements DataAdapter {
     })
   }
 
+  async updateImageAltText(imageId: string, productId: string, altText: string): Promise<void> {
+    const img = this.images.get(imageId)
+    if (!img || img.product_id !== productId) {
+      throw new Error('Image not found')
+    }
+    this.images.set(imageId, { ...img, alt_text: altText })
+  }
+
   // ---------------------------------------------------------------------------
   // Analytics
   // ---------------------------------------------------------------------------
