@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Search, ShoppingCart, SlidersHorizontal } from 'lucide-react';
 import type { Product, Category } from '@/lib/db/types';
@@ -182,8 +183,9 @@ export default function ShopClient({ products, categories }: ShopClientProps) {
             const categoryName = product.category?.name ?? '';
             const firstImage = product.images?.[0]?.storage_path ?? null;
             return (
-              <div
+              <Link
                 key={product.id}
+                href={`/shop/${product.id}`}
                 className="bg-[#141414] border border-[#2e2e2e] rounded-xl overflow-hidden flex flex-col hover:border-[#f3c41b]/30 transition-colors group"
               >
                 {/* Image */}
@@ -223,14 +225,14 @@ export default function ShopClient({ products, categories }: ShopClientProps) {
                   </p>
                   <button
                     type="button"
-                    onClick={() => addToCart()}
+                    onClick={(e) => { e.preventDefault(); addToCart(); }}
                     className="mt-2 w-full bg-[#f3c41b] text-[#0f0f0f] font-bold text-xs py-2.5 rounded-lg hover:bg-[#e8b818] transition-colors flex items-center justify-center gap-1.5"
                   >
                     <span>+</span>
                     <span>Add to Cart</span>
                   </button>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
