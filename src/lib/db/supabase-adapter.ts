@@ -427,17 +427,9 @@ export class SupabaseAdapter implements DataAdapter {
 
     const supabase = await this.getClient()
 
-    // Ensure bucket exists — check first, only create when absent
-    const { data: existingBuckets, error: listError } = await supabase.storage.listBuckets()
-    if (listError) throw new Error(`Storage list error: ${listError.message}`)
-    const bucketExists = existingBuckets?.some((b: { name: string }) => b.name === STORAGE_BUCKET)
-    if (!bucketExists) {
-      const { error: createError } = await supabase.storage.createBucket(STORAGE_BUCKET, {
-        public: true,
-      })
-      if (createError) throw new Error(`Storage bucket creation failed: ${createError.message}`)
-    }
-
+    // Bucket must exist before uploads — created administratively or via migration 006.
+    // No runtime creation: attempting createBucket with admin session triggers RLS on
+    // storage.buckets and would fail silently or raise a confusing error.
     const imageId = randomUUID()
     const ext = EXT_MAP[file.type] ?? 'jpg'
     const storagePath = `${productId}/${imageId}.${ext}`

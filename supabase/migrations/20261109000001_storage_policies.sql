@@ -1,13 +1,14 @@
--- Migration 006: Storage bucket policies for product-images
--- LOCAL ONLY — run `npx supabase db push --remote` to apply after migrations 001-005.
--- Creates the product-images bucket (if absent) and sets up RLS policies.
+-- Migration 006: Storage RLS policies for product-images bucket
+-- The 'product-images' bucket must be pre-created (via dashboard or admin tooling)
+-- before this migration runs. This migration only adds RLS policies on storage.objects.
+--
+-- Policy matrix:
+--   INSERT  → authenticated + is_admin()   (upload new files)
+--   UPDATE  → authenticated + is_admin()   (replace / upsert)
+--   DELETE  → authenticated + is_admin()   (remove files)
+--   SELECT  → anon + authenticated         (public read; bucket is public)
 
--- Ensure bucket exists with public read access
-INSERT INTO storage.buckets (id, name, public)
-VALUES ('product-images', 'product-images', true)
-ON CONFLICT (id) DO NOTHING;
-
--- Allow authenticated admins to upload (INSERT)
+-- Admins can upload files to the product-images bucket
 CREATE POLICY "product_images_admin_insert"
 ON storage.objects
 FOR INSERT
@@ -17,7 +18,21 @@ WITH CHECK (
   AND is_admin()
 );
 
--- Allow authenticated admins to delete their uploads
+-- Admins can overwrite / upsert files (needed for future replace-in-place)
+CREATE POLICY "product_images_admin_update"
+ON storage.objects
+FOR UPDATE
+TO authenticated
+USING (
+  bucket_id = 'product-images'
+  AND is_admin()
+)
+WITH CHECK (
+  bucket_id = 'product-images'
+  AND is_admin()
+);
+
+-- Admins can delete files from the product-images bucket
 CREATE POLICY "product_images_admin_delete"
 ON storage.objects
 FOR DELETE
@@ -27,7 +42,7 @@ USING (
   AND is_admin()
 );
 
--- Allow public read of all product images (bucket is public, but explicit policy for clarity)
+-- Visitors and authenticated users can view product images (public catalog)
 CREATE POLICY "product_images_public_read"
 ON storage.objects
 FOR SELECT
