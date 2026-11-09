@@ -298,8 +298,31 @@ are queued and ready. Run this command to unlock:
 - AnnouncementBar text reading from `store_settings` DB (currently hardcoded)
 - Admin notifications (email on new inquiry)
 
+## Hotfix — Next.js 16 prerendering error (2026-11-09)
+
+### Root cause
+`src/lib/db/index.ts` exports `db` at module level. During prerendering analysis
+Next.js 16 (`cacheComponents: true`) traced `new MockAdapter()` → `seed()` → `now()`
+→ `new Date().toISOString()` and raised "unstable value Date.now() while prerendering".
+
+### Fixes applied
+1. **`src/lib/db/mock-adapter.ts`** — Introduced `SEED_DATE = '2024-01-01T00:00:00.000Z'`
+   constant. All `now()` calls inside `seed()` (categories `created_at`, products
+   `created_at`/`updated_at`, inventory `updated_at`) replaced with `SEED_DATE`.
+   The `now()` function itself is preserved for mutation operations at request time.
+
+2. **`src/app/admin/(protected)/layout.tsx`** — Added `await connection()` from
+   `next/server` as the first statement. This marks the entire admin subtree as
+   request-dependent, preventing prerendering of any child that might call `new Date()`.
+
+### Validation results (2026-11-09)
+- TypeScript strict: 0 errors
+- ESLint: 0 errors
+- Vitest: **98/98 pass** (70 unit + 28 integration)
+- Next.js build: clean (23 routes — all /admin routes render as `ƒ` Dynamic, no prerender warning)
+
 ## Session handoff
-Session 2026-11-09: Corte 3D product media manager complete. 94/94 tests pass.
+Session 2026-11-09: Hotfix complete. 98/98 tests pass.
 Dev server (Supabase mode): `npm run dev -- --port 3002` (no ADMIN_DEV_BYPASS).
 Dev server (bypass mode): `ADMIN_DEV_BYPASS=true npm run dev -- --port 3001`.
 **NEXT ACTION**: `npx supabase db push --remote` to apply all 6 migrations to JDHOUSE,

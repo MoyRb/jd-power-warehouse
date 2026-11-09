@@ -1,7 +1,11 @@
+import { connection } from 'next/server'
 import { requireAdmin } from '@/lib/auth/server'
 import AdminSidebar from '@/components/admin/AdminSidebar'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  // Mark this subtree as request-dependent to prevent prerendering.
+  // This eliminates the "unstable value Date.now()" warning from Next.js 16.
+  await connection()
   // Server-side auth guard — redirects to /admin/login if not authenticated
   await requireAdmin()
 

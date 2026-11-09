@@ -32,6 +32,10 @@ function now(): string {
   return new Date().toISOString()
 }
 
+// Fixed timestamp used only during seed() so module-level MockAdapter
+// initialisation does not call new Date() during Next.js prerendering.
+const SEED_DATE = '2024-01-01T00:00:00.000Z'
+
 export class MockAdapter implements DataAdapter {
   private products: Map<string, Product>
   private categories: Map<string, Category>
@@ -66,7 +70,7 @@ export class MockAdapter implements DataAdapter {
         name: cat.slug, // use the short name (Tools, Outdoor, etc.) as canonical name
         slug: dbSlug,
         sort_order: index + 1,
-        created_at: now(),
+        created_at: SEED_DATE,
       }
       this.categories.set(id, category)
     })
@@ -85,8 +89,8 @@ export class MockAdapter implements DataAdapter {
         category_id: categoryId,
         status: 'published',
         badge: p.badge ?? null,
-        created_at: now(),
-        updated_at: now(),
+        created_at: SEED_DATE,
+        updated_at: SEED_DATE,
         quantity: 10,
       }
       this.products.set(id, product)
@@ -97,7 +101,7 @@ export class MockAdapter implements DataAdapter {
         id: invId,
         product_id: id,
         quantity: 10,
-        updated_at: now(),
+        updated_at: SEED_DATE,
       })
 
       // Images
