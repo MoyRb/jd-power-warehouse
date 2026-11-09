@@ -248,9 +248,59 @@ are queued and ready. Run this command to unlock:
 
 - Migration 005 push to remote (depends on migrations 001–004 being applied first)
 
+## Corte 3D — Product Media Manager + Fixes (2026-11-09)
+
+### What was built
+
+**Bug fixes:**
+- React key warning: keyed `<Fragment>` in `InquiriesTable` and `InventoryTable` (bare `<>` → `<Fragment key={...}>`)
+
+**Image infrastructure:**
+- `getProductImageSrc` now constructs full Supabase public Storage URLs for bare storage paths
+- `next.config.ts`: added `remotePatterns` for `*.supabase.co`
+- `DataAdapter` + `MockAdapter` + `SupabaseAdapter`: added `updateImageAltText(imageId, productId, altText)`
+- `SupabaseAdapter.uploadImage`: compensatory `storage.remove` on DB insert failure (orphan prevention)
+- `SupabaseAdapter.uploadImage`: explicit bucket existence check before `createBucket` (no silent failures)
+
+**Admin image manager (`ImageUploader.tsx`):**
+- Multi-file selection (`multiple` on input), 10-image limit enforced client + server
+- Preview queue with per-file status (pending/uploading/done/error)
+- Primary badge (first image by sort_order)
+- Inline alt text editing with validation (non-empty, ≤200 chars)
+- `useOptimistic` for instant UI on delete/reorder/altText edits
+- Drag-and-drop reorder preserved
+
+**Server actions:**
+- `createProductAction` now returns `{ id?, error? }` → redirects to `/admin/products/${id}/edit?created=1`
+- `uploadProductImageAction`: 10-image server-side limit guard
+- `updateImageAltTextAction`: new action with validation
+
+**Storage security:**
+- `supabase/migrations/20261109000001_storage_policies.sql` (local only) — bucket creation + RLS policies
+
+**Catalog integration:**
+- `/shop/[id]` product detail page with `ProductGallery` (main image + thumbnails, WhatsApp CTA)
+- Product cards in `/shop` are now `<Link href="/shop/${id}">` (button stops propagation)
+
+### Validation results (2026-11-09)
+
+- TypeScript strict: 0 errors
+- ESLint: 0 errors
+- Vitest: **94/94 pass** (70 unit + 24 integration)
+- Next.js build: clean (23/23 routes, 0 errors)
+
+### Deferred
+
+- Migrations 001–005 push to remote (`npx supabase db push --remote`)
+- Migration 006 (storage policies) push — depends on 001–004 first
+- Playwright E2E with real Supabase auth (requires pushing migrations)
+- `src/middleware.ts` → `src/proxy.ts` migration (Next.js 16 convention)
+- AnnouncementBar text reading from `store_settings` DB (currently hardcoded)
+- Admin notifications (email on new inquiry)
+
 ## Session handoff
-Session 2026-11-09: Corte 3C analytics dashboard complete. 75/75 tests pass.
+Session 2026-11-09: Corte 3D product media manager complete. 94/94 tests pass.
 Dev server (Supabase mode): `npm run dev -- --port 3002` (no ADMIN_DEV_BYPASS).
 Dev server (bypass mode): `ADMIN_DEV_BYPASS=true npm run dev -- --port 3001`.
-**NEXT ACTION**: `npx supabase db push --remote` to apply all 4 migrations to JDHOUSE,
-then validate admin login + CRUD with real credentials via Playwright.
+**NEXT ACTION**: `npx supabase db push --remote` to apply all 6 migrations to JDHOUSE,
+then validate admin login + CRUD + image upload with real credentials via Playwright.
