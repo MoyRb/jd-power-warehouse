@@ -29,6 +29,10 @@ import type {
   CreateInquiryInput,
   ProductImage,
   ImageFile,
+  ProductStats,
+  CategoryStat,
+  InquiryStats,
+  LowStockProduct,
 } from './types'
 
 const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
@@ -497,5 +501,194 @@ export class SupabaseAdapter implements DataAdapter {
           .eq('product_id', productId),
       ),
     )
+  }
+
+  // ---------------------------------------------------------------------------
+  // Analytics
+  // ---------------------------------------------------------------------------
+
+  async getProductStats(lowStockThreshold = 5): Promise<ProductStats> {
+    const zero: ProductStats = {
+      total: 0, published: 0, draft: 0, archived: 0,
+      totalCategories: 0, totalUnits: 0, outOfStock: 0, lowStock: 0,
+      estimatedInventoryValue: 0,
+    }
+    try {
+      const supabase = await this.getClient()
+
+      const [
+        { count: total },
+        { count: published },
+        { count: draft },
+        { count: archived },
+        { count: totalCategories },
+        { data: invRows },
+      ] = await Promise.all([
+        supabase.from('products').select('*', { count: 'exact', head: true }),
+        supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'published'),
+        supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'draft'),
+        supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'archived'),
+        supabase.from('categories').select('*', { count: 'exact', head: true }),
+        supabase
+          .from('inventory')
+          .select('quantity, products!inner(price, status)')
+          .neq('products.status', 'archived'),
+      ])
+
+      let totalUnits = 0
+      let outOfStock = 0
+      let lowStock = 0
+      let estimatedInventoryValue = 0
+
+      for (const row of (invRows ?? []) as Array<{ quantity: number; products: { price: number; status: string } }>) {
+        const qty = row.quantity
+        const price = Number(row.products.price)
+        totalUnits += qty
+        estimatedInventoryValue += qty * price
+        if (qty === 0) {
+          outOfStock++
+        } else if (lowStockThreshold > 0 && qty <= lowStockThreshold) {
+          lowStock++
+        }
+      }
+
+      return {
+        total: total ?? 0,
+        published: published ?? 0,
+        draft: draft ?? 0,
+        archived: archived ?? 0,
+        totalCategories: totalCategories ?? 0,
+        totalUnits,
+        outOfStock,
+        lowStock,
+        estimatedInventoryValue,
+      }
+    } catch {
+      return zero
+    }
+  }
+
+  async getCategoryStats(lowStockThreshold = 5): Promise<CategoryStat[]> {
+    try {
+      const supabase = await this.getClient()
+
+      const [{ data: categories }, { data: products }] = await Promise.all([
+        supabase.from('categories').select('*').order('sort_order', { ascending: true }),
+        supabase
+          .from('products')
+          .select('id, price, status, category_id, inventory(quantity)'),
+      ])
+
+      return (categories ?? []).map((cat: Record<string, unknown>) => {
+        const catProducts = (products ?? []).filter(
+          (p: Record<string, unknown>) => p.category_id === cat.id,
+        ) as Array<{ id: string; price: number | string; status: string; category_id: string; inventory: { quantity: number } | null }>
+
+        const productCount = catProducts.length
+        const publishedCount = catProducts.filter((p) => p.status === 'published').length
+        let totalUnits = 0
+        let outOfStock = 0
+        let lowStock = 0
+        let estimatedValue = 0
+
+        for (const p of catProducts) {
+          if (p.status === 'archived') continue
+          const qty = p.inventory?.quantity ?? 0
+          const price = Number(p.price)
+          totalUnits += qty
+          estimatedValue += qty * price
+          if (qty === 0) {
+            outOfStock++
+          } else if (lowStockThreshold > 0 && qty <= lowStockThreshold) {
+            lowStock++
+          }
+        }
+
+        return {
+          id: cat.id as string,
+          name: cat.name as string,
+          slug: cat.slug as string,
+          productCount,
+          publishedCount,
+          totalUnits,
+          outOfStock,
+          lowStock,
+          estimatedValue,
+        }
+      })
+    } catch {
+      return []
+    }
+  }
+
+  async getInquiryStats(days = 30): Promise<InquiryStats> {
+    const zero: InquiryStats = { total: 0, byType: {}, byStatus: {}, pending: 0, trend: [] }
+    try {
+      const supabase = await this.getClient()
+
+      const cutoff = new Date()
+      cutoff.setDate(cutoff.getDate() - days)
+      const cutoffISO = cutoff.toISOString()
+
+      const [{ count: total }, { data: recent }] = await Promise.all([
+        supabase.from('inquiries').select('*', { count: 'exact', head: true }),
+        supabase
+          .from('inquiries')
+          .select('type, status, created_at')
+          .gte('created_at', cutoffISO),
+      ])
+
+      const byType: Record<string, number> = {}
+      const byStatus: Record<string, number> = {}
+
+      for (const row of (recent ?? []) as Array<{ type: string; status: string; created_at: string }>) {
+        byType[row.type] = (byType[row.type] ?? 0) + 1
+        byStatus[row.status] = (byStatus[row.status] ?? 0) + 1
+      }
+
+      const pending = (byStatus['new'] ?? 0) + (byStatus['read'] ?? 0)
+
+      // Build trend array for the last `days` days
+      const trend: { date: string; count: number }[] = []
+      const rows = (recent ?? []) as Array<{ created_at: string }>
+      const now = new Date()
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(now)
+        d.setDate(d.getDate() - i)
+        const dateStr = d.toISOString().substring(0, 10)
+        const count = rows.filter((r) => r.created_at.substring(0, 10) === dateStr).length
+        trend.push({ date: dateStr, count })
+      }
+
+      return { total: total ?? 0, byType, byStatus, pending, trend }
+    } catch {
+      return zero
+    }
+  }
+
+  async getLowStockProducts(threshold = 5): Promise<LowStockProduct[]> {
+    try {
+      const supabase = await this.getClient()
+
+      const { data } = await supabase
+        .from('inventory')
+        .select('quantity, products!inner(id, name, status, categories(name))')
+        .lte('quantity', threshold)
+        .neq('products.status', 'archived')
+        .order('quantity', { ascending: true })
+
+      return (data ?? []).map((row: Record<string, unknown>) => {
+        const p = row.products as { id: string; name: string; status: string; categories: { name: string } | null }
+        return {
+          id: p.id,
+          name: p.name,
+          categoryName: p.categories?.name ?? null,
+          quantity: row.quantity as number,
+          status: p.status as 'draft' | 'published' | 'archived',
+        }
+      })
+    } catch {
+      return []
+    }
   }
 }

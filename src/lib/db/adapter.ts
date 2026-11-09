@@ -15,6 +15,10 @@ import type {
   CreateInquiryInput,
   ProductImage,
   ImageFile,
+  ProductStats,
+  CategoryStat,
+  InquiryStats,
+  LowStockProduct,
 } from './types'
 
 export interface DataAdapter {
@@ -52,4 +56,10 @@ export interface DataAdapter {
   uploadImage(productId: string, file: ImageFile): Promise<ProductImage>
   deleteImage(imageId: string): Promise<void>
   reorderImages(productId: string, imageIds: string[]): Promise<void>
+
+  // Analytics
+  getProductStats(lowStockThreshold?: number): Promise<ProductStats>
+  getCategoryStats(lowStockThreshold?: number): Promise<CategoryStat[]>
+  getInquiryStats(days?: number): Promise<InquiryStats>
+  getLowStockProducts(threshold?: number): Promise<LowStockProduct[]>
 }

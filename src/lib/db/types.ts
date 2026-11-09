@@ -142,3 +142,52 @@ export interface ImageFile {
   size: number
   buffer: Buffer
 }
+
+// ---------------------------------------------------------------------------
+// Analytics types
+// ---------------------------------------------------------------------------
+
+export interface ProductStats {
+  total: number
+  published: number
+  draft: number
+  archived: number
+  totalCategories: number
+  totalUnits: number
+  outOfStock: number
+  lowStock: number
+  estimatedInventoryValue: number
+}
+
+export interface CategoryStat {
+  id: string
+  name: string
+  slug: string
+  productCount: number
+  publishedCount: number
+  totalUnits: number
+  outOfStock: number
+  lowStock: number
+  estimatedValue: number
+}
+
+export interface InquiryDayCount {
+  date: string   // "YYYY-MM-DD"
+  count: number
+}
+
+export interface InquiryStats {
+  total: number
+  byType: Record<string, number>
+  byStatus: Record<string, number>
+  pending: number
+  trend: InquiryDayCount[]
+}
+
+export interface LowStockProduct {
+  id: string
+  name: string
+  categoryName: string | null
+  quantity: number
+  status: ProductStatus
+}

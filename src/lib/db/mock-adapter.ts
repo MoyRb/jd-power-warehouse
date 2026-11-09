@@ -19,6 +19,10 @@ import type {
   CreateInquiryInput,
   ProductImage,
   ImageFile,
+  ProductStats,
+  CategoryStat,
+  InquiryStats,
+  LowStockProduct,
 } from './types'
 
 const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
@@ -388,5 +392,148 @@ export class MockAdapter implements DataAdapter {
         this.images.set(imgId, { ...img, sort_order: index })
       }
     })
+  }
+
+  // ---------------------------------------------------------------------------
+  // Analytics
+  // ---------------------------------------------------------------------------
+
+  async getProductStats(lowStockThreshold = 5): Promise<ProductStats> {
+    const allProducts = Array.from(this.products.values())
+    const total = allProducts.length
+    const published = allProducts.filter((p) => p.status === 'published').length
+    const draft = allProducts.filter((p) => p.status === 'draft').length
+    const archived = allProducts.filter((p) => p.status === 'archived').length
+    const totalCategories = this.categories.size
+
+    let totalUnits = 0
+    let outOfStock = 0
+    let lowStock = 0
+    let estimatedInventoryValue = 0
+
+    for (const product of allProducts) {
+      if (product.status === 'archived') continue
+      const qty = this.inventory.get(product.id)?.quantity ?? 0
+      totalUnits += qty
+      estimatedInventoryValue += qty * product.price
+      if (qty === 0) {
+        outOfStock++
+      } else if (lowStockThreshold > 0 && qty <= lowStockThreshold) {
+        lowStock++
+      }
+    }
+
+    return {
+      total,
+      published,
+      draft,
+      archived,
+      totalCategories,
+      totalUnits,
+      outOfStock,
+      lowStock,
+      estimatedInventoryValue,
+    }
+  }
+
+  async getCategoryStats(lowStockThreshold = 5): Promise<CategoryStat[]> {
+    const result: CategoryStat[] = []
+
+    for (const category of this.categories.values()) {
+      const categoryProducts = Array.from(this.products.values()).filter(
+        (p) => p.category_id === category.id,
+      )
+
+      const productCount = categoryProducts.length
+      const publishedCount = categoryProducts.filter((p) => p.status === 'published').length
+
+      let totalUnits = 0
+      let outOfStock = 0
+      let lowStock = 0
+      let estimatedValue = 0
+
+      for (const product of categoryProducts) {
+        if (product.status === 'archived') continue
+        const qty = this.inventory.get(product.id)?.quantity ?? 0
+        totalUnits += qty
+        estimatedValue += qty * product.price
+        if (qty === 0) {
+          outOfStock++
+        } else if (lowStockThreshold > 0 && qty <= lowStockThreshold) {
+          lowStock++
+        }
+      }
+
+      result.push({
+        id: category.id,
+        name: category.name,
+        slug: category.slug,
+        productCount,
+        publishedCount,
+        totalUnits,
+        outOfStock,
+        lowStock,
+        estimatedValue,
+      })
+    }
+
+    return result.sort((a, b) => b.productCount - a.productCount)
+  }
+
+  async getInquiryStats(days = 30): Promise<InquiryStats> {
+    const allInquiries = Array.from(this.inquiries.values())
+    const total = allInquiries.length
+
+    const byType: Record<string, number> = {}
+    const byStatus: Record<string, number> = {}
+
+    for (const inq of allInquiries) {
+      byType[inq.type] = (byType[inq.type] ?? 0) + 1
+      byStatus[inq.status] = (byStatus[inq.status] ?? 0) + 1
+    }
+
+    const pending = (byStatus['new'] ?? 0) + (byStatus['read'] ?? 0)
+
+    // Build trend: last `days` days, count inquiries per date
+    const trend: { date: string; count: number }[] = []
+    if (total === 0) {
+      return { total, byType, byStatus, pending, trend }
+    }
+
+    const now = new Date()
+    for (let i = days - 1; i >= 0; i--) {
+      const d = new Date(now)
+      d.setDate(d.getDate() - i)
+      const dateStr = d.toISOString().substring(0, 10)
+      const count = allInquiries.filter(
+        (inq) => inq.created_at.substring(0, 10) === dateStr,
+      ).length
+      trend.push({ date: dateStr, count })
+    }
+
+    return { total, byType, byStatus, pending, trend }
+  }
+
+  async getLowStockProducts(threshold = 5): Promise<LowStockProduct[]> {
+    const result: LowStockProduct[] = []
+
+    for (const product of this.products.values()) {
+      if (product.status === 'archived') continue
+      const qty = this.inventory.get(product.id)?.quantity ?? 0
+      if (qty <= threshold) {
+        const category = product.category_id
+          ? this.categories.get(product.category_id)
+          : null
+        result.push({
+          id: product.id,
+          name: product.name,
+          categoryName: category?.name ?? null,
+          quantity: qty,
+          status: product.status,
+        })
+      }
+    }
+
+    return result.sort((a, b) => a.quantity - b.quantity)
   }
 }
