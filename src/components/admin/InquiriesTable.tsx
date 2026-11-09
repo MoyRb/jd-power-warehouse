@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { Fragment, useState, useTransition } from 'react'
 import type { Inquiry, InquiryStatus, InquiryType } from '@/lib/db/types'
 import { updateInquiryStatusAction } from '@/app/admin/_actions/inquiries'
 
@@ -113,9 +113,8 @@ export default function InquiriesTable({ inquiries: initialInquiries }: Inquirie
             </thead>
             <tbody>
               {filtered.map((inquiry) => (
-                <>
+                <Fragment key={inquiry.id}>
                   <tr
-                    key={inquiry.id}
                     className={`border-b border-[#2e2e2e] hover:bg-[#141414]/60 transition-colors cursor-pointer ${
                       expanded === inquiry.id ? 'bg-[#141414]/40' : ''
                     }`}
@@ -191,7 +190,7 @@ export default function InquiriesTable({ inquiries: initialInquiries }: Inquirie
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>

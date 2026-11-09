@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { Fragment, useState, useTransition } from 'react'
 import type { Product, Category } from '@/lib/db/types'
 import { adjustInventoryAction } from '@/app/admin/_actions/inventory'
 
@@ -77,9 +77,8 @@ export default function InventoryTable({ products, categories }: InventoryTableP
               const isAdjusting = adjusting?.productId === product.id
 
               return (
-                <>
+                <Fragment key={product.id}>
                   <tr
-                    key={product.id}
                     className="border-b border-[#2e2e2e] last:border-0 hover:bg-[#141414]/60 transition-colors"
                   >
                     <td className="px-4 py-3">
@@ -156,7 +155,7 @@ export default function InventoryTable({ products, categories }: InventoryTableP
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               )
             })}
           </tbody>
