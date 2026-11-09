@@ -7,7 +7,7 @@ import type { Product, Category } from '@/lib/db/types'
 interface ProductFormProps {
   product?: Product
   categories: Category[]
-  action: (formData: FormData) => Promise<{ error?: string }>
+  action: (formData: FormData) => Promise<{ id?: string; error?: string }>
 }
 
 const inputClass =
@@ -29,6 +29,8 @@ export default function ProductForm({ product, categories, action }: ProductForm
       const result = await action(formData)
       if (result.error) {
         setError(result.error)
+      } else if (result.id) {
+        router.push(`/admin/products/${result.id}/edit?created=1`)
       } else {
         router.push('/admin/products')
       }

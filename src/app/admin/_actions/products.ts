@@ -18,7 +18,7 @@ export async function setProductStatusAction(
 
 export async function createProductAction(
   formData: FormData,
-): Promise<{ error?: string }> {
+): Promise<{ id?: string; error?: string }> {
   await requireAdmin()
 
   const raw = {
@@ -39,10 +39,10 @@ export async function createProductAction(
     return { error: result.error.issues[0]?.message ?? 'Validation error' }
   }
 
-  await db.createProduct(result.data)
+  const product = await db.createProduct(result.data)
   revalidatePath('/admin/products')
   revalidatePath('/shop')
-  return {}
+  return { id: product.id }
 }
 
 export async function updateProductAction(
