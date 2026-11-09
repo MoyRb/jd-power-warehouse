@@ -210,9 +210,46 @@ are queued and ready. Run this command to unlock:
 - Admin notifications (email on new inquiry)
 - Playwright E2E with real Supabase auth (requires pushing migrations first)
 
+## Corte 3C — Analytics Dashboard (2026-11-09)
+
+### What was built
+
+**DataAdapter analytics methods** (all adapters):
+- `getProductStats(threshold?)` — counts by status, inventory totals, estimated value
+- `getCategoryStats(threshold?)` — per-category breakdown (LEFT JOIN semantics, empty categories included)
+- `getInquiryStats(days?)` — type/status breakdown + N-day trend array
+- `getLowStockProducts(threshold?)` — sorted ascending by quantity, archived excluded
+
+**UI components** (no new npm deps):
+- `src/components/admin/BarChart.tsx` — CSS horizontal bars with gold accent
+- `src/components/admin/Sparkline.tsx` — SVG inline line chart with fill area
+- `src/lib/analytics.ts` — `getAdminAnalytics()` bundles all 4 methods in parallel, never throws
+
+**Analytics dashboard page** (`/admin`):
+- 8 KPI cards: Total Products, Published, Drafts, Archived, Categories, Total Units, Out of Stock, Low Stock
+- Potential Sale Value card (estimated inventory value at current prices × units)
+- Products by Category section: BarChart + compact data table
+- Inquiry Analytics: type/status counts, Sparkline 30-day trend, status breakdown table
+- Critical Inventory table: products at or below configurable threshold
+- Low-stock threshold read from `store_settings.low_stock_threshold` (default: 5)
+
+**Local migration** (`supabase/migrations/20261109000000_analytics_indexes.sql`):
+- 5 performance indexes for dashboard queries (local only, NOT pushed to remote)
+- Waiting for migrations 001–004 to be confirmed applied to JDHOUSE first
+
+### Validation results (2026-11-09)
+
+- TypeScript strict: 0 errors
+- ESLint: 0 errors
+- Vitest: **75/75 pass** (56 unit + 19 integration)
+- Next.js build: clean (22/22 routes, 0 errors)
+
+### Deferred
+
+- Migration 005 push to remote (depends on migrations 001–004 being applied first)
+
 ## Session handoff
-Session 2026-11-09: Corte 3B implementation complete. SupabaseAdapter fully implemented.
-59/59 tests pass (45 unit + 14 integration). Build clean.
+Session 2026-11-09: Corte 3C analytics dashboard complete. 75/75 tests pass.
 Dev server (Supabase mode): `npm run dev -- --port 3002` (no ADMIN_DEV_BYPASS).
 Dev server (bypass mode): `ADMIN_DEV_BYPASS=true npm run dev -- --port 3001`.
 **NEXT ACTION**: `npx supabase db push --remote` to apply all 4 migrations to JDHOUSE,
