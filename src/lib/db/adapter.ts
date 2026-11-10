@@ -19,6 +19,19 @@ import type {
   CategoryStat,
   InquiryStats,
   LowStockProduct,
+  // B2B
+  BusinessCustomer,
+  CustomerFilter,
+  CreateCustomerInput,
+  UpdateCustomerInput,
+  Quote,
+  QuoteFilter,
+  QuoteStatus,
+  QuoteLine,
+  QuoteEvent,
+  CreateQuoteInput,
+  UpdateQuoteLineInput,
+  QuoteStats,
 } from './types'
 
 export interface DataAdapter {
@@ -63,4 +76,50 @@ export interface DataAdapter {
   getCategoryStats(lowStockThreshold?: number): Promise<CategoryStat[]>
   getInquiryStats(days?: number): Promise<InquiryStats>
   getLowStockProducts(threshold?: number): Promise<LowStockProduct[]>
+
+  // B2B — Business Customers
+  listCustomers(filter?: CustomerFilter): Promise<PaginatedResult<BusinessCustomer>>
+  getCustomer(id: string): Promise<BusinessCustomer | null>
+  createCustomer(data: CreateCustomerInput): Promise<BusinessCustomer>
+  updateCustomer(id: string, data: UpdateCustomerInput): Promise<BusinessCustomer>
+
+  // B2B — Quotes
+  listQuotes(filter?: QuoteFilter): Promise<PaginatedResult<Quote>>
+  getQuote(id: string): Promise<Quote | null>
+  createQuote(data: CreateQuoteInput): Promise<Quote>
+  updateQuoteStatus(
+    id: string,
+    status: QuoteStatus,
+    adminId: string,
+    note?: string,
+  ): Promise<void>
+  setQuoteLinePrices(
+    quoteId: string,
+    prices: Array<{ lineId: string; unitQuotedPrice: number }>,
+  ): Promise<void>
+  addQuoteLine(
+    quoteId: string,
+    data: { product_id?: string | null; quantity: number; description?: string | null },
+  ): Promise<QuoteLine>
+  removeQuoteLine(quoteId: string, lineId: string): Promise<void>
+  linkCustomerToQuote(quoteId: string, customerId: string): Promise<void>
+
+  // B2B — Analytics
+  getQuoteStats(days?: number): Promise<QuoteStats>
+}
+
+// Re-export B2B types for convenience
+export type {
+  BusinessCustomer,
+  CustomerFilter,
+  CreateCustomerInput,
+  UpdateCustomerInput,
+  Quote,
+  QuoteFilter,
+  QuoteStatus,
+  QuoteLine,
+  QuoteEvent,
+  CreateQuoteInput,
+  UpdateQuoteLineInput,
+  QuoteStats,
 }
