@@ -930,10 +930,10 @@ export class MockAdapter implements DataAdapter {
 
   async setQuoteLinePrices(
     quoteId: string,
-    prices: Array<{ lineId: string; unitQuotedPrice: number }>,
+    prices: Array<{ lineId: string; unitQuotedPrice: number | null }>,
   ): Promise<void> {
     for (const { lineId, unitQuotedPrice } of prices) {
-      if (unitQuotedPrice < 0) throw new Error('price_must_be_non_negative')
+      if (unitQuotedPrice !== null && unitQuotedPrice < 0) throw new Error('price_must_be_non_negative')
       const line = this.quoteLines.get(lineId)
       if (!line || line.quote_id !== quoteId) throw new Error(`line_not_found: ${lineId}`)
       this.quoteLines.set(lineId, { ...line, unit_quoted_price: unitQuotedPrice })
