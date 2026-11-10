@@ -12,7 +12,9 @@ export const CreateCustomerSchema = z.object({
   notes: z.string().max(2000).optional().nullable(),
 })
 
-export const UpdateCustomerSchema = CreateCustomerSchema.partial()
+export const UpdateCustomerSchema = CreateCustomerSchema.partial().extend({
+  price_tier: z.string().max(50).optional().nullable(),
+})
 
 export type CreateCustomerInput = z.infer<typeof CreateCustomerSchema>
 export type UpdateCustomerInput = z.infer<typeof UpdateCustomerSchema>

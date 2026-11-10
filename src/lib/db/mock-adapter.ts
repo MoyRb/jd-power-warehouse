@@ -895,8 +895,8 @@ export class MockAdapter implements DataAdapter {
   async updateQuoteStatus(
     id: string,
     status: QuoteStatus,
-    adminId: string,
-    note?: string,
+    note: string | null,
+    adminId?: string,
   ): Promise<void> {
     const q = this.quotes.get(id)
     if (!q) throw new Error('quote_not_found')
@@ -919,7 +919,7 @@ export class MockAdapter implements DataAdapter {
     this.quoteEvents.set(eventId, {
       id: eventId,
       quote_id: id,
-      admin_id: adminId,
+      admin_id: adminId ?? null,
       event_type: eventType,
       old_status: q.status,
       new_status: status,

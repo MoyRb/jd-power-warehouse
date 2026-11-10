@@ -90,12 +90,12 @@ export interface DataAdapter {
   updateQuoteStatus(
     id: string,
     status: QuoteStatus,
-    adminId: string,
-    note?: string,
+    note: string | null,
+    adminId?: string,
   ): Promise<void>
   setQuoteLinePrices(
     quoteId: string,
-    prices: Array<{ lineId: string; unitQuotedPrice: number }>,
+    prices: Array<{ lineId: string; unitQuotedPrice: number | null }>,
   ): Promise<void>
   addQuoteLine(
     quoteId: string,

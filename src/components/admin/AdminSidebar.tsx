@@ -8,6 +8,8 @@ import {
   Tag,
   Warehouse,
   MessageSquare,
+  FileText,
+  Building2,
   Settings,
   LogOut,
   Menu,
@@ -23,6 +25,8 @@ const navLinks = [
   { href: '/admin/categories', label: 'Categories', icon: Tag             },
   { href: '/admin/inventory',  label: 'Inventory',  icon: Warehouse       },
   { href: '/admin/inquiries',  label: 'Inquiries',  icon: MessageSquare   },
+  { href: '/admin/quotes',     label: 'Quotes',     icon: FileText        },
+  { href: '/admin/customers',  label: 'Customers',  icon: Building2       },
   { href: '/admin/settings',   label: 'Settings',   icon: Settings        },
 ]
 

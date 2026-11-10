@@ -1,11 +1,12 @@
 import { db } from './db'
-import type { ProductStats, CategoryStat, InquiryStats, LowStockProduct } from './db'
+import type { ProductStats, CategoryStat, InquiryStats, LowStockProduct, QuoteStats } from './db'
 
 export interface AdminAnalytics {
   products: ProductStats
   categories: CategoryStat[]
   inquiries: InquiryStats
   lowStock: LowStockProduct[]
+  quotes: QuoteStats
   threshold: number
 }
 
@@ -19,13 +20,20 @@ const ZERO_INQUIRIES: InquiryStats = {
   total: 0, byType: {}, byStatus: {}, pending: 0, trend: [],
 }
 
+const ZERO_QUOTES: QuoteStats = {
+  total: 0, byStatus: {}, pending: 0, sent: 0, accepted: 0,
+  rejected: 0, expired: 0, sentValue: 0, acceptedValue: 0,
+  conversionRate: null, trend: [],
+}
+
 export async function getAdminAnalytics(threshold = 5): Promise<AdminAnalytics> {
-  const [products, categories, inquiries, lowStock] = await Promise.all([
+  const [products, categories, inquiries, lowStock, quotes] = await Promise.all([
     db.getProductStats(threshold).catch(() => ZERO_PRODUCTS),
     db.getCategoryStats(threshold).catch(() => []),
     db.getInquiryStats(30).catch(() => ZERO_INQUIRIES),
     db.getLowStockProducts(threshold).catch(() => []),
+    db.getQuoteStats(30).catch(() => ZERO_QUOTES),
   ])
 
-  return { products, categories, inquiries, lowStock, threshold }
+  return { products, categories, inquiries, lowStock, quotes, threshold }
 }

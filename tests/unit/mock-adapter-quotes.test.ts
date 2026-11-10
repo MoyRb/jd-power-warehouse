@@ -203,14 +203,14 @@ describe('MockAdapter — Quote state machine', () => {
 
   it('allows valid transition pending → reviewing', async () => {
     const q = await createPendingQuote()
-    await expect(adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id')).resolves.toBeUndefined()
+    await expect(adapter.updateQuoteStatus(q.id, 'reviewing', null, 'admin-id')).resolves.toBeUndefined()
     const updated = await adapter.getQuote(q.id)
     expect(updated!.status).toBe('reviewing')
   })
 
   it('records quote_event on status change', async () => {
     const q = await createPendingQuote()
-    await adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id', 'Starting review')
+    await adapter.updateQuoteStatus(q.id, 'reviewing', 'Starting review', 'admin-id')
     const full = await adapter.getQuote(q.id)
     expect(full!.events).toHaveLength(1)
     expect(full!.events![0].event_type).toBe('status_change')
@@ -221,24 +221,24 @@ describe('MockAdapter — Quote state machine', () => {
 
   it('rejects invalid transition pending → accepted', async () => {
     const q = await createPendingQuote()
-    await expect(adapter.updateQuoteStatus(q.id, 'accepted', 'admin-id')).rejects.toThrow()
+    await expect(adapter.updateQuoteStatus(q.id, 'accepted', null, 'admin-id')).rejects.toThrow()
   })
 
   it('rejects transition from terminal status accepted', async () => {
     const q = await createPendingQuote()
-    await adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id')
-    await adapter.updateQuoteStatus(q.id, 'sent', 'admin-id')
-    await adapter.updateQuoteStatus(q.id, 'accepted', 'admin-id')
-    await expect(adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id')).rejects.toThrow()
+    await adapter.updateQuoteStatus(q.id, 'reviewing', null, 'admin-id')
+    await adapter.updateQuoteStatus(q.id, 'sent', null, 'admin-id')
+    await adapter.updateQuoteStatus(q.id, 'accepted', null, 'admin-id')
+    await expect(adapter.updateQuoteStatus(q.id, 'reviewing', null, 'admin-id')).rejects.toThrow()
   })
 
   it('allows expired → reviewing (reopen) with note', async () => {
     const q = await createPendingQuote()
-    await adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id')
-    await adapter.updateQuoteStatus(q.id, 'sent', 'admin-id')
-    await adapter.updateQuoteStatus(q.id, 'expired', 'admin-id')
+    await adapter.updateQuoteStatus(q.id, 'reviewing', null, 'admin-id')
+    await adapter.updateQuoteStatus(q.id, 'sent', null, 'admin-id')
+    await adapter.updateQuoteStatus(q.id, 'expired', null, 'admin-id')
     await expect(
-      adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id', 'Client requested reopen')
+      adapter.updateQuoteStatus(q.id, 'reviewing', 'Client requested reopen', 'admin-id')
     ).resolves.toBeUndefined()
     const full = await adapter.getQuote(q.id)
     expect(full!.status).toBe('reviewing')
@@ -249,10 +249,10 @@ describe('MockAdapter — Quote state machine', () => {
 
   it('rejects expired → reviewing without note', async () => {
     const q = await createPendingQuote()
-    await adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id')
-    await adapter.updateQuoteStatus(q.id, 'sent', 'admin-id')
-    await adapter.updateQuoteStatus(q.id, 'expired', 'admin-id')
-    await expect(adapter.updateQuoteStatus(q.id, 'reviewing', 'admin-id')).rejects.toThrow()
+    await adapter.updateQuoteStatus(q.id, 'reviewing', null, 'admin-id')
+    await adapter.updateQuoteStatus(q.id, 'sent', null, 'admin-id')
+    await adapter.updateQuoteStatus(q.id, 'expired', null, 'admin-id')
+    await expect(adapter.updateQuoteStatus(q.id, 'reviewing', null, 'admin-id')).rejects.toThrow()
   })
 })
 

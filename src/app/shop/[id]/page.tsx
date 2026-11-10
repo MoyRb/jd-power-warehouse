@@ -107,6 +107,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <span>Reserve via WhatsApp</span>
             </a>
             <Link
+              href={`/quote?product_id=${product.id}`}
+              className="flex items-center justify-center gap-2 w-full bg-[#f3c41b] text-[#0a0a0a] font-bold py-3.5 rounded-xl hover:bg-[#e6b800] transition-colors"
+            >
+              Request a Quote
+            </Link>
+            <Link
               href="/contact"
               className="flex items-center justify-center w-full bg-[#141414] border border-[#2e2e2e] text-[#f6f4ee] font-bold py-3.5 rounded-xl hover:border-[#f3c41b]/40 transition-colors"
             >

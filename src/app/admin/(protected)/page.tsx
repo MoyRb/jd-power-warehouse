@@ -15,7 +15,7 @@ export default async function AdminDashboardPage() {
   const threshold = typeof rawThreshold === 'number' ? rawThreshold : 5
   const analytics = await getAdminAnalytics(threshold)
 
-  const { products, categories, inquiries, lowStock } = analytics
+  const { products, categories, inquiries, lowStock, quotes } = analytics
   const isLive = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL)
 
   return (
@@ -203,7 +203,55 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* ── Section 6: Critical Inventory (Low Stock) ── */}
+      {/* ── Section 6: Quote Analytics ── */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-bold text-[#f6f4ee]">Quote Analytics</h2>
+          <Link href="/admin/quotes" className="text-xs text-[#f3c41b] hover:underline">View all →</Link>
+        </div>
+        <div className="grid lg:grid-cols-2 gap-4">
+          {/* KPI summary */}
+          <div className="bg-[#141414] border border-[#2e2e2e] rounded-xl p-6 space-y-4">
+            <div className="flex justify-between items-center">
+              <span className="text-[#8c8c8c] text-sm">Total Quotes</span>
+              <span className="text-[#f6f4ee] font-bold">{quotes.total}</span>
+            </div>
+            <div className="border-t border-[#2e2e2e] pt-3 space-y-2">
+              {(['pending', 'reviewing', 'sent', 'accepted', 'rejected', 'expired'] as const).map((s) => (
+                <div key={s} className="flex justify-between items-center text-sm">
+                  <span className="text-[#8c8c8c] capitalize">{s}</span>
+                  <span className="text-[#f6f4ee]">{quotes.byStatus[s] ?? 0}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Value + conversion */}
+          <div className="bg-[#141414] border border-[#2e2e2e] rounded-xl p-6 space-y-4">
+            <div>
+              <p className="text-[#8c8c8c] text-xs mb-1">Sent Quote Value</p>
+              <p className="text-2xl font-black text-[#f3c41b]">
+                {quotes.sentValue.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}
+              </p>
+            </div>
+            <div>
+              <p className="text-[#8c8c8c] text-xs mb-1">Accepted Quote Value</p>
+              <p className="text-2xl font-black text-green-400">
+                {quotes.acceptedValue.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}
+              </p>
+            </div>
+            <div className="border-t border-[#2e2e2e] pt-3">
+              <p className="text-[#8c8c8c] text-xs mb-1">Conversion Rate</p>
+              <p className="text-xl font-bold text-[#f6f4ee]">
+                {quotes.conversionRate != null ? `${(quotes.conversionRate * 100).toFixed(1)}%` : '—'}
+              </p>
+              <p className="text-xs text-[#555] mt-0.5">accepted / (sent + accepted + rejected)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Section 7: Critical Inventory (Low Stock) ── */}
       <div>
         <h2 className="text-lg font-bold text-[#f6f4ee] mb-1">Critical Inventory</h2>
         <p className="text-[#8c8c8c] text-sm mb-4">Products at or below {threshold} units</p>
@@ -257,11 +305,12 @@ export default async function AdminDashboardPage() {
         )}
       </div>
 
-      {/* ── Section 7: Quick actions ── */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* ── Section 8: Quick actions ── */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { href: '/admin/products/new', label: 'Add Product',    desc: 'Create a new product listing' },
           { href: '/admin/inquiries',    label: 'View Inquiries', desc: `${inquiries.pending} pending message${inquiries.pending !== 1 ? 's' : ''}` },
+          { href: '/admin/quotes',       label: 'View Quotes',    desc: `${quotes.pending} pending quote${quotes.pending !== 1 ? 's' : ''}` },
           { href: '/admin/inventory',    label: 'Manage Stock',   desc: 'Adjust inventory levels' },
         ].map((item) => (
           <Link

@@ -951,26 +951,26 @@ export class SupabaseAdapter implements DataAdapter {
   async updateQuoteStatus(
     id: string,
     status: QuoteStatus,
-    adminId: string,
-    note?: string,
+    note: string | null,
+    adminId?: string,
   ): Promise<void> {
     const supabase = await this.getClient()
     const { error } = await supabase.rpc('admin_update_quote_status', {
       p_quote_id:   id,
       p_new_status: status,
-      p_admin_id:   adminId,
-      p_note:       note ?? null,
+      p_admin_id:   adminId ?? null,
+      p_note:       note,
     })
     if (error) throw new Error(error.message)
   }
 
   async setQuoteLinePrices(
     quoteId: string,
-    prices: Array<{ lineId: string; unitQuotedPrice: number }>,
+    prices: Array<{ lineId: string; unitQuotedPrice: number | null }>,
   ): Promise<void> {
     const supabase = await this.getClient()
     for (const { lineId, unitQuotedPrice } of prices) {
-      if (unitQuotedPrice < 0) throw new Error('price_must_be_non_negative')
+      if (unitQuotedPrice !== null && unitQuotedPrice < 0) throw new Error('price_must_be_non_negative')
       const { error } = await supabase
         .from('quote_lines')
         .update({ unit_quoted_price: unitQuotedPrice })
