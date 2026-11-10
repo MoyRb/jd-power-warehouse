@@ -327,3 +327,76 @@ Dev server (Supabase mode): `npm run dev -- --port 3002` (no ADMIN_DEV_BYPASS).
 Dev server (bypass mode): `ADMIN_DEV_BYPASS=true npm run dev -- --port 3001`.
 **NEXT ACTION**: `npx supabase db push --remote` to apply all 6 migrations to JDHOUSE,
 then validate admin login + CRUD + image upload with real credentials via Playwright.
+
+## Corte 4A — B2B Quotes + Customers (2026-11-09)
+
+### What was built
+
+**Data model** (`supabase/migrations/20261110000000_b2b_schema.sql`):
+- Tables: `business_customers`, `quotes`, `quote_lines`, `quote_events`
+- `quote_ref` sequence generates human-readable refs `QT-YYYY-NNNN`
+- `validate_quote_transition()` IMMUTABLE function — PostgreSQL state machine
+- `create_quote_with_lines()` SECURITY DEFINER RPC — atomic anon submission, server-validates product IDs and snapshots prices from DB (no client-price trust)
+- `admin_update_quote_status()` SECURITY DEFINER RPC — atomic status + event write; enforces `is_admin()`
+
+**RLS** (`supabase/migrations/20261110000001_b2b_rls.sql`):
+- `business_customers`: admin-only SELECT/INSERT/UPDATE; no anon access
+- `quotes`: anon INSERT blocked (submissions only via RPC); admin SELECT/UPDATE
+- `quote_lines`: admin-only direct access; anon uses RPC
+- `quote_events`: admin SELECT + INSERT (append-only, no UPDATE/DELETE)
+- GRANT EXECUTE on RPCs to anon + authenticated
+
+**Types** (`src/lib/db/types.ts`): `QuoteStatus`, `QuoteEventType`, `BusinessCustomer`, `QuoteLine`, `Quote`, `QuoteEvent`, `QuoteStats`, + all input/filter types
+
+**Validations**: `src/lib/validations/quote.ts` (mixed catalog+freeform line schemas, 1–20 line constraint); `src/lib/validations/customer.ts` (ISO-3166-1 country, price_tier)
+
+**MockAdapter** (25 new B2B unit tests): `listCustomers`, `getCustomer`, `createCustomer`, `updateCustomer`, `listQuotes`, `getQuote`, `createQuote`, `updateQuoteStatus`, `setQuoteLinePrices`, `addQuoteLine`, `removeQuoteLine`, `linkCustomerToQuote`, `getQuoteStats`; 2 seed customers + 3 seed quotes
+
+**SupabaseAdapter**: same 13 B2B methods; `createQuote` and `updateQuoteStatus` use SECURITY DEFINER RPCs; direct table access for all other methods
+
+**Public /quote page**: 3-step wizard client component (search catalog + free-form items → contact info → review); server action with IP-keyed rate limiting (5 req/15 min); "Request Quote" button added to `/shop/[id]`
+
+**Admin /admin/quotes**: list page with status tabs + search; detail page with inline price editing, status machine UI (dropdown + note), and event history
+
+**Admin /admin/customers**: list page; new customer form; edit page with all fields including price_tier
+
+**Sidebar**: Quotes + Customers nav entries added
+
+**Analytics dashboard**: Quote KPIs section (total by status, sent/accepted value, conversion rate); Quotes quick-action card
+
+### Commercial decisions (locked for Corte 4A)
+- D1: Mixed quotes — catalog products + free-form items in same quote
+- D2: Notification stubs only (no SMTP)
+- D3: `price_tier` stub field stored, not enforced
+- D4: expired → reviewing reopen allowed with required note
+- D7: accepted is terminal (no auto-orders)
+- D8: Optional tax_id, country-agnostic (not forced RFC)
+- D9: USD default, `currency_code` stored per line
+
+### Validation results (2026-11-09)
+- TypeScript strict: 0 errors
+- Vitest: **123/123 pass**
+- Next.js build: clean (28 routes, 0 errors)
+- Branch: `feat/b2b-quotes`
+
+### Migrations pending remote push (3 new)
+```
+npx supabase db push --remote
+```
+New migrations to push:
+- `20261110000000_b2b_schema.sql`
+- `20261110000001_b2b_rls.sql`
+- `20261110000002_b2b_indexes.sql`
+
+### Open Questions
+- Cart vs WhatsApp-first purchase flow?
+- EN/ES i18n from start?
+- B2B customer portal (login + quote tracking) in scope for Corte 5?
+
+### Deferred
+- Playwright E2E for `/quote` form and admin quotes/customers
+- `updateCustomerAction` redirect on new customer — currently uses `redirect()` which bypasses `useActionState`'s success handling (acceptable; navigates directly to customer detail)
+- `src/middleware.ts` → `src/proxy.ts` migration (Next.js 16 convention)
+- AnnouncementBar text from DB
+- Admin email notifications (new quote / new customer)
+- B2B customer portal
