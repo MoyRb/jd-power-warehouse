@@ -938,10 +938,27 @@ export class SupabaseAdapter implements DataAdapter {
 
     if (error) throw new Error(error.message)
 
-    const { id } = result as { id: string; quote_ref: string }
-    const quote = await this.getQuote(id)
-    if (!quote) throw new Error('Quote created but getQuote returned null')
-    return quote
+    const { id, quote_ref } = result as { id: string; quote_ref: string }
+    // Build a minimal Quote from the RPC response — anon client cannot SELECT quotes
+    // (no anon SELECT policy), but the caller only needs id + quote_ref for the
+    // success confirmation. Full data is available via getQuote() with an admin client.
+    const now = new Date().toISOString()
+    return {
+      id,
+      quote_ref,
+      customer_id: null,
+      anon_name: data.anon_name,
+      anon_email: data.anon_email,
+      anon_phone: data.anon_phone ?? null,
+      anon_company: data.anon_company ?? null,
+      status: 'pending',
+      currency_code: 'USD',
+      admin_notes: null,
+      valid_until: null,
+      ip_hash: data.ip_hash ?? null,
+      created_at: now,
+      updated_at: now,
+    }
   }
 
   /**

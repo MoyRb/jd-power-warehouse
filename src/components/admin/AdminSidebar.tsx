@@ -45,7 +45,7 @@ export default function AdminSidebar() {
       <div className="flex items-center gap-3 px-4 py-5 border-b border-[#2e2e2e]">
         <div className="w-8 h-8 relative shrink-0">
           <Image
-            src="/images/logo/151663a7-cc48-492e-93d3-ab8a929b7a09_png.png"
+            src="/images/logo/151663a7-560a-4334-a81d-264aee653769_jpg.jpg"
             alt="JD Power Warehouse"
             fill
             className="object-contain"

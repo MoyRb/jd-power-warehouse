@@ -1,7 +1,8 @@
 'use client'
 
 import { useActionState, useEffect, useRef, useState } from 'react'
-import { Plus, Trash2, Package, PenLine, ChevronRight, ChevronLeft, CheckCircle2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Trash2, Package, PenLine, ChevronRight, ChevronLeft, CheckCircle2 } from 'lucide-react'
 import { submitQuoteAction, type SubmitQuoteResult } from '@/app/quote/actions'
 import type { Product } from '@/lib/db/types'
 
@@ -67,7 +68,9 @@ export default function QuoteRequestForm({ products, initialProductId }: Props) 
   })
   const [productSearch, setProductSearch] = useState('')
   const [lineErrors, setLineErrors] = useState<Record<string, string>>({})
+  const [contactSnapshot, setContactSnapshot] = useState({ anon_name: '', anon_email: '', anon_company: '', anon_phone: '' })
   const formRef = useRef<HTMLFormElement>(null)
+  const router = useRouter()
 
   const [state, formAction, isPending] = useActionState<SubmitQuoteResult | null, FormData>(
     submitQuoteAction,
@@ -192,7 +195,7 @@ export default function QuoteRequestForm({ products, initialProductId }: Props) 
         </p>
         <button
           type="button"
-          onClick={() => window.location.assign('/shop')}
+          onClick={() => router.push('/shop')}
           className="mt-4 px-6 py-2.5 bg-[#f3c41b] text-[#0a0a0a] rounded-lg font-bold text-sm hover:bg-[#f3c41b]/90 transition-colors"
         >
           Back to Shop
@@ -207,10 +210,6 @@ export default function QuoteRequestForm({ products, initialProductId }: Props) 
   return (
     <form
       ref={formRef}
-      action={(fd) => {
-        // This runs only when the form is submitted via browser fallback
-        // The handleSubmit function handles the custom flow
-      }}
       className="space-y-6"
       noValidate
     >
@@ -477,7 +476,18 @@ export default function QuoteRequestForm({ products, initialProductId }: Props) 
             <button
               type="button"
               onClick={() => {
-                if (formRef.current && validateStep2(formRef.current)) setStep(3)
+                if (!formRef.current) return
+                if (!validateStep2(formRef.current)) return
+                const f = formRef.current
+                const val = (name: string) =>
+                  (f.querySelector(`[name="${name}"]`) as HTMLInputElement | null)?.value ?? ''
+                setContactSnapshot({
+                  anon_name: val('anon_name'),
+                  anon_email: val('anon_email'),
+                  anon_company: val('anon_company'),
+                  anon_phone: val('anon_phone'),
+                })
+                setStep(3)
               }}
               className="flex items-center gap-2 px-6 py-2.5 bg-[#f3c41b] text-[#0a0a0a] rounded-lg font-bold text-sm hover:bg-[#f3c41b]/90 transition-colors"
             >
@@ -501,7 +511,7 @@ export default function QuoteRequestForm({ products, initialProductId }: Props) 
               <p className="text-[#f6f4ee] text-sm font-semibold">Items ({lines.length})</p>
             </div>
             <div className="divide-y divide-[#1e1e1e]">
-              {lines.map((line, idx) => (
+              {lines.map((line) => (
                 <div key={line.key} className="px-4 py-3 flex items-center justify-between gap-3 text-sm">
                   <div className="min-w-0">
                     <p className="text-[#f6f4ee] truncate">
@@ -522,16 +532,13 @@ export default function QuoteRequestForm({ products, initialProductId }: Props) 
 
           {/* Contact summary */}
           <div className="bg-[#141414] border border-[#2e2e2e] rounded-xl p-4 text-sm space-y-1">
-            <p className="text-[#f6f4ee] font-medium">
-              {(formRef.current?.querySelector('[name="anon_name"]') as HTMLInputElement)?.value}
-            </p>
-            <p className="text-[#8c8c8c]">
-              {(formRef.current?.querySelector('[name="anon_email"]') as HTMLInputElement)?.value}
-            </p>
-            {(formRef.current?.querySelector('[name="anon_company"]') as HTMLInputElement)?.value && (
-              <p className="text-[#8c8c8c]">
-                {(formRef.current?.querySelector('[name="anon_company"]') as HTMLInputElement)?.value}
-              </p>
+            <p className="text-[#f6f4ee] font-medium">{contactSnapshot.anon_name}</p>
+            <p className="text-[#8c8c8c]">{contactSnapshot.anon_email}</p>
+            {contactSnapshot.anon_company && (
+              <p className="text-[#8c8c8c]">{contactSnapshot.anon_company}</p>
+            )}
+            {contactSnapshot.anon_phone && (
+              <p className="text-[#8c8c8c]">{contactSnapshot.anon_phone}</p>
             )}
           </div>
 
