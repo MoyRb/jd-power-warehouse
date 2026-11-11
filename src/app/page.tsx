@@ -12,7 +12,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 const whyItems = [
   { icon: DollarSign, title: 'Unbeatable Prices',    desc: 'We source overstock and returns directly from major retailers and pass the savings on to you — up to 70% off retail.' },
   { icon: CheckCircle, title: 'Quality Tested',      desc: "Every item is inspected before hitting our floor. If it's on our shelves, it's worth buying." },
-  { icon: ShoppingCart, title: 'Our Community (Motto)', desc: 'We bridge the gap between major retailers and the community with affordable home improvement products.' },
+  { icon: ShoppingCart, title: 'Community First', desc: 'We bridge the gap between major retailers and the community with affordable home improvement products.' },
   { icon: MapPin, title: 'Local Pickup',             desc: "Located in Plainfield, IL, we're open daily 6am–10pm. Reserve via WhatsApp and pick up same day." },
 ];
 
@@ -218,12 +218,10 @@ export default function HomePage() {
               Browse Inventory
             </Link>
             <a
-              href="https://wa.me/18155550123"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:contact@jd-power-warehouse.com"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0f0f0f] text-[#f6f4ee] font-bold text-sm px-7 py-3.5 rounded-xl hover:bg-[#1a1200] transition-colors"
             >
-              Message on WhatsApp
+              Contact Us
             </a>
           </div>
         </div>

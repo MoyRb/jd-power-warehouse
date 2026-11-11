@@ -4,9 +4,10 @@ import { testimonials } from '@/data/testimonials';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Customer Testimonials | JD Power Warehouse',
+  title: 'Customer Testimonials',
   description:
     'Read what our customers have to say about the quality, prices, and service at JD Power Warehouse in Plainfield, IL.',
+  alternates: { canonical: '/testimonials' },
 };
 
 function StarRating({ rating }: { rating: number }) {

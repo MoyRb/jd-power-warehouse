@@ -3,9 +3,11 @@ import { Heart, Shield, Users } from 'lucide-react';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'About Us | JD Power Warehouse',
+  title: 'About Us',
   description:
-    'Learn about JD Power Warehouse in Plainfield, IL. We bridge the gap between major retailers and the community with affordable home improvement products.',
+    'Learn about JD Power Warehouse in Plainfield, IL. Family-owned liquidation warehouse bridging the gap between major retailers and the community with affordable home improvement products.',
+  alternates: { canonical: '/about' },
+  openGraph: { title: 'About Us — JD Power Warehouse', url: '/about' },
 };
 
 export default function AboutPage() {

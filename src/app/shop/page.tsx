@@ -8,9 +8,11 @@ import { db } from '@/lib/db';
 export const instant = false;
 
 export const metadata: Metadata = {
-  title: 'Shop Liquidation Inventory | JD Power Warehouse Plainfield IL',
+  title: 'Shop Liquidation Inventory',
   description:
-    'Browse tools, lawn equipment, grills, and outdoor patio sets up to 70% off retail prices. Local pickup in Plainfield, IL or instant WhatsApp reservation.',
+    'Browse tools, lawn equipment, grills, and outdoor patio sets up to 70% off retail prices. Local pickup in Plainfield & Homer Glen, IL. New overstock added weekly.',
+  alternates: { canonical: '/shop' },
+  openGraph: { title: 'Shop Liquidation Inventory — JD Power Warehouse', url: '/shop' },
 };
 
 export default async function ShopPage() {

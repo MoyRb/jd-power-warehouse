@@ -450,7 +450,7 @@ export default function QuoteRequestForm({ products, initialProductId }: Props) 
                 maxLength={30}
                 autoComplete="tel"
                 className="w-full bg-[#0a0a0a] border border-[#2e2e2e] rounded-lg px-3 py-2 text-[#f6f4ee] text-sm placeholder:text-[#8c8c8c] focus:outline-none focus:border-[#f3c41b]/50"
-                placeholder="+1 (815) 555-0100 (optional)"
+                placeholder="+1 (optional)"
               />
             </div>
           </div>

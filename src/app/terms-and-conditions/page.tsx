@@ -36,7 +36,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-[#f6f4ee] font-bold text-lg mb-3">5. Contact</h2>
-            <p>For questions about these terms, contact us at (815) 555-0123 or via WhatsApp.</p>
+            <p>For questions about these terms, contact us at <a href="mailto:contact@jd-power-warehouse.com" className="text-[#f3c41b] hover:underline">contact@jd-power-warehouse.com</a>.</p>
           </section>
         </div>
       </div>

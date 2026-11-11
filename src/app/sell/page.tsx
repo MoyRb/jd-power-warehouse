@@ -4,9 +4,10 @@ import SellForm from '@/components/sell/SellForm';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Sell Your Overstock & Tools for Cash | JD Power Warehouse IL',
+  title: 'Sell Your Overstock & Tools',
   description:
-    'Got overstock, tools, or outdoor equipment? Sell your home improvement items directly to JD Power Warehouse in Plainfield, IL for quick cash.',
+    'Got overstock, tools, or outdoor equipment? Sell your home improvement items directly to JD Power Warehouse in Plainfield, IL.',
+  alternates: { canonical: '/sell' },
 };
 
 const steps = [

@@ -31,12 +31,12 @@ export default function RefundPolicyPage() {
 
           <section>
             <h2 className="text-[#f6f4ee] font-bold text-lg mb-3">Process</h2>
-            <p>To initiate a return, contact us via WhatsApp at +1 (815) 555-0123 with your purchase details and reason for return. We will review each case individually.</p>
+            <p>To initiate a return, email us at <a href="mailto:contact@jd-power-warehouse.com" className="text-[#f3c41b] hover:underline">contact@jd-power-warehouse.com</a> with your purchase details and reason for return. We will review each case individually.</p>
           </section>
 
           <section>
             <h2 className="text-[#f6f4ee] font-bold text-lg mb-3">Contact</h2>
-            <p>Questions? Reach us at (815) 555-0123 or message us on WhatsApp.</p>
+            <p>Questions? Email us at <a href="mailto:contact@jd-power-warehouse.com" className="text-[#f3c41b] hover:underline">contact@jd-power-warehouse.com</a>.</p>
           </section>
         </div>
       </div>

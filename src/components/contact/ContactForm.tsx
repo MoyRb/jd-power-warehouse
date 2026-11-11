@@ -54,7 +54,7 @@ export default function ContactForm() {
           <label className="block text-sm font-medium text-[#f6f4ee] mb-1.5">Phone</label>
           <input
             type="tel"
-            placeholder="(815) 555-0000"
+            placeholder="(optional)"
             value={form.phone}
             onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
             className={inputClass}

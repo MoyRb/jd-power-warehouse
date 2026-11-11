@@ -15,9 +15,11 @@ const securityHeaders = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",   // unsafe-eval required by Next.js dev; tighten post-launch
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://*.supabase.co",
+      "img-src 'self' data: blob: https://*.supabase.co https://maps.googleapis.com https://maps.gstatic.com",
       "font-src 'self'",
       "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+      // Google Maps embed iframe (contact page)
+      "frame-src https://www.google.com https://maps.google.com",
       "frame-ancestors 'none'",
     ].join('; '),
   },

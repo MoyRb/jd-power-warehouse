@@ -127,7 +127,7 @@ export default function SellForm() {
           <label className="block text-sm font-medium text-[#f6f4ee] mb-1.5">Phone Number</label>
           <input
             type="tel"
-            placeholder="(815) 555-0123"
+            placeholder="(815) 000-0000"
             value={form.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
             className={inputClass}

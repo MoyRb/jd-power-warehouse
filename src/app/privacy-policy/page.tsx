@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
 
           <section>
             <h2 className="text-[#f6f4ee] font-bold text-lg mb-3">4. Contact Us</h2>
-            <p>If you have questions about this privacy policy, please contact us at (815) 555-0123 or via WhatsApp.</p>
+            <p>If you have questions about this privacy policy, please contact us at <a href="mailto:contact@jd-power-warehouse.com" className="text-[#f3c41b] hover:underline">contact@jd-power-warehouse.com</a>.</p>
           </section>
         </div>
       </div>
