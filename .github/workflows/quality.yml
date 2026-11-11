@@ -1,4 +1,4 @@
-﻿name: Quality Gates
+name: Quality Gates
 
 on:
   push:
@@ -22,6 +22,15 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run check
+
+      - run: npm run lint
+
+      - run: npm run typecheck
+
+      # Unit tests only — integration tests require external Supabase infrastructure.
+      # They are skipped here (describe.skipIf guards) and run in the integration workflow.
+      - run: npm run test:unit
+
       - run: npm run build
+
       - run: npm audit --audit-level=high

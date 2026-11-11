@@ -2,7 +2,7 @@
  * Unit tests for image-related server actions (T3 — Corte 3D).
  * Uses MockAdapter via ADMIN_DEV_BYPASS path; actions call db which is MockAdapter in test env.
  */
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 
 // Mock requireAdmin to pass in tests
 vi.mock('@/lib/auth/server', () => ({

@@ -28,10 +28,14 @@ describe.skipIf(!HAS_SUPABASE)('B2B Quotes + Customers — smoke tests (real JDH
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const adapter = new SupabaseAdapter(anonClientFactory as any)
-  const anonClient = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  )
+  // Guard: createClient must NOT be called at describe-body evaluation time when
+  // env vars are absent — the describe body runs even when skipIf skips execution.
+  const anonClient = HAS_SUPABASE
+    ? createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      )
+    : null
 
   // For admin operations (admin-only methods), we need a service-role client
   const serviceAdapter = HAS_SERVICE_ROLE
@@ -73,7 +77,7 @@ describe.skipIf(!HAS_SUPABASE)('B2B Quotes + Customers — smoke tests (real JDH
   // ── RLS: anon direct table access ──────────────────────────────────────────
 
   it('anon cannot INSERT directly into quotes (RLS blocks, use RPC)', async () => {
-    const { error } = await anonClient.from('quotes').insert({
+    const { error } = await anonClient!.from('quotes').insert({
       anon_name: '[rls-test] unauthorized',
       anon_email: 'rls@example.com',
       status: 'pending',
@@ -84,7 +88,7 @@ describe.skipIf(!HAS_SUPABASE)('B2B Quotes + Customers — smoke tests (real JDH
   })
 
   it('anon cannot INSERT directly into business_customers (RLS blocks)', async () => {
-    const { error } = await anonClient.from('business_customers').insert({
+    const { error } = await anonClient!.from('business_customers').insert({
       company_name: '[rls-test] unauthorized',
       contact_name: 'Test',
       email: 'rls@example.com',
@@ -94,7 +98,7 @@ describe.skipIf(!HAS_SUPABASE)('B2B Quotes + Customers — smoke tests (real JDH
   })
 
   it('anon cannot SELECT from business_customers (admin-only table)', async () => {
-    const { data, error } = await anonClient.from('business_customers').select('id')
+    const { data, error } = await anonClient!.from('business_customers').select('id')
     // Either error or empty result — anon has no SELECT policy
     if (error) {
       expect(error.message).toBeTruthy()
@@ -104,7 +108,7 @@ describe.skipIf(!HAS_SUPABASE)('B2B Quotes + Customers — smoke tests (real JDH
   })
 
   it('anon cannot SELECT from quotes (no anon SELECT policy)', async () => {
-    const { data, error } = await anonClient.from('quotes').select('id')
+    const { data, error } = await anonClient!.from('quotes').select('id')
     if (error) {
       expect(error.message).toBeTruthy()
     } else {
@@ -113,7 +117,7 @@ describe.skipIf(!HAS_SUPABASE)('B2B Quotes + Customers — smoke tests (real JDH
   })
 
   it('anon cannot SELECT from quote_lines (admin-only)', async () => {
-    const { data, error } = await anonClient.from('quote_lines').select('id')
+    const { data, error } = await anonClient!.from('quote_lines').select('id')
     if (error) {
       expect(error.message).toBeTruthy()
     } else {
@@ -122,7 +126,7 @@ describe.skipIf(!HAS_SUPABASE)('B2B Quotes + Customers — smoke tests (real JDH
   })
 
   it('anon cannot SELECT from quote_events (admin-only)', async () => {
-    const { data, error } = await anonClient.from('quote_events').select('id')
+    const { data, error } = await anonClient!.from('quote_events').select('id')
     if (error) {
       expect(error.message).toBeTruthy()
     } else {

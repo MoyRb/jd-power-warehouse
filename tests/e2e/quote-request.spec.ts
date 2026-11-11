@@ -98,7 +98,6 @@ test.describe('Public Quote Request Form', () => {
     await page.goto(`/quote?product_id=${productId}`)
 
     // The item should already be in the list (pre-loaded)
-    const lineList = page.locator('[data-testid="quote-line"], table tbody tr, .quote-line')
     // At minimum, the "Continue" button should be enabled (item present)
     const nextBtn = page.getByRole('button', { name: /continue/i })
     await expect(nextBtn).toBeVisible({ timeout: 5_000 })

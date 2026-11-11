@@ -4,7 +4,7 @@ test.describe('Admin Auth', () => {
   test('GET /admin redirects to /admin/login when not authenticated', async ({ page }) => {
     // Clear any existing auth cookies
     await page.context().clearCookies()
-    const response = await page.goto('/admin')
+    await page.goto('/admin')
     // Should end up at login (after redirect)
     await expect(page).toHaveURL(/\/admin\/login/)
   })
