@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+// unsafe-eval is required by Next.js webpack HMR in development but NOT in
+// production builds (next build / next start).  Removing it in production
+// eliminates a medium-severity CSP finding without breaking anything.
+const isDev = process.env.NODE_ENV === 'development'
+
 const securityHeaders = [
   { key: 'X-Frame-Options', value: 'DENY' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -13,7 +18,9 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",   // unsafe-eval required by Next.js dev; tighten post-launch
+      isDev
+        ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+        : "script-src 'self' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://*.supabase.co https://maps.googleapis.com https://maps.gstatic.com",
       "font-src 'self'",

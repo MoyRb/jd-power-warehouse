@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { MapPin, ExternalLink } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/site-config';
 
+// City-level map — no verified street address is available.
+// Once the owner confirms the address, update SITE_CONFIG.location.mapsQuery
+// to the full address (e.g. "123+Main+St,+Plainfield,+IL+60544").
 const MAPS_EMBED_URL = `https://www.google.com/maps?q=${SITE_CONFIG.location.mapsQuery}&output=embed`;
-const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/search/?api=1&query=${SITE_CONFIG.location.mapsQuery}`;
+const MAPS_SEARCH_URL = `https://www.google.com/maps/search/?api=1&query=${SITE_CONFIG.location.mapsQuery}`;
 
 export default function BusinessLocationMap() {
   const [loaded, setLoaded] = useState(false);
@@ -20,7 +23,7 @@ export default function BusinessLocationMap() {
           <p className="text-[#8c8c8c] text-xs mt-1">{SITE_CONFIG.hours.display}</p>
         </div>
         <a
-          href={MAPS_DIRECTIONS_URL}
+          href={MAPS_SEARCH_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-sm text-[#f3c41b] hover:text-[#f3c41b]/80 transition-colors font-medium"
@@ -42,9 +45,16 @@ export default function BusinessLocationMap() {
         </div>
       )}
 
+      {/* Service area note — no verified street address available */}
+      <div className="absolute top-3 left-3 z-10">
+        <span className="text-[10px] bg-[#141414]/90 backdrop-blur border border-[#2e2e2e] text-[#8c8c8c] px-2 py-1 rounded-md">
+          Service area map — exact address provided upon contact
+        </span>
+      </div>
+
       <iframe
         src={MAPS_EMBED_URL}
-        title={`Map showing ${SITE_CONFIG.location.display}`}
+        title={`Service area map — ${SITE_CONFIG.location.display}`}
         width="100%"
         height="320"
         loading="lazy"
@@ -55,17 +65,17 @@ export default function BusinessLocationMap() {
         onError={() => setError(true)}
       />
 
-      {/* Get Directions overlay button */}
+      {/* View on Maps overlay button */}
       {loaded && (
         <div className="absolute bottom-3 right-3">
           <a
-            href={MAPS_DIRECTIONS_URL}
+            href={MAPS_SEARCH_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 bg-[#141414]/90 backdrop-blur border border-[#f3c41b]/30 text-[#f3c41b] text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-[#1a1a1a] transition-colors shadow"
           >
             <ExternalLink className="w-3.5 h-3.5" />
-            Get Directions
+            View on Maps
           </a>
         </div>
       )}

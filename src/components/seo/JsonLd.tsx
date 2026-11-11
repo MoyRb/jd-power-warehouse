@@ -23,11 +23,14 @@ export function OrganizationJsonLd() {
       { '@type': 'City', name: 'Plainfield', containedIn: 'Illinois' },
       { '@type': 'City', name: 'Homer Glen', containedIn: 'Illinois' },
     ],
+    // No streetAddress — exact address not yet verified by business owner.
+    // Update SITE_CONFIG.location when the address is confirmed.
     address: {
       '@type': 'PostalAddress',
       addressLocality: SITE_CONFIG.location.city,
       addressRegion: SITE_CONFIG.location.stateCode,
       addressCountry: SITE_CONFIG.location.country,
+      // streetAddress: SITE_CONFIG.location.streetAddress, // TODO: pending owner confirmation
     },
     openingHoursSpecification: SITE_CONFIG.hours.days.map((day) => ({
       '@type': 'OpeningHoursSpecification',
