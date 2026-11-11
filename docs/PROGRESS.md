@@ -400,3 +400,99 @@ New migrations to push:
 - AnnouncementBar text from DB
 - Admin email notifications (new quote / new customer)
 - B2B customer portal
+
+## Corte 5 — Production Readiness Audit (2026-11-10)
+
+### What was done
+- Security hardening: `isDevBypassEnabled()` centralized; structural guard prevents bypass in production
+- `store_settings` RLS: `FOR ALL` → explicit SELECT+INSERT+UPDATE policies
+- `is_admin()` SECURITY DEFINER with fixed `search_path`
+- HTTP security headers in `next.config.ts`: CSP, X-Frame-Options, HSTS, etc.
+- Proxy file renamed `src/middleware.ts` → `src/proxy.ts` (Next.js 16)
+- All 7 admin server action modules verified to call `requireAdmin()` as first statement
+- Docs created: `docs/SECURITY_REPORT.md`, `docs/PRODUCTION_AUDIT.md`, `docs/DEPLOYMENT_GUIDE.md`, `docs/RELEASE_CHECKLIST.md`
+- E2E test selectors fixed for Playwright
+
+### Validation results (2026-11-10)
+- TypeScript strict: 0 errors
+- ESLint: 0 errors (0 warnings)
+- Vitest: **134/134 pass | 8 skipped**
+- Next.js build: clean (29 routes, 0 errors)
+- Commit: `c97936d`
+
+## Hotfix — GitHub Actions CI/CD (2026-11-11)
+
+### Root cause
+`quotes-b2b.smoke.test.ts` called `createClient()` at `describe` callback evaluation time (before `skipIf` could skip). `supabaseUrl is required` error in CI where `NEXT_PUBLIC_SUPABASE_URL` is absent.
+
+### Fixes
+- Guard `anonClient` with `HAS_SUPABASE ? createClient(...) : null` ternary
+- Fix ESLint warnings: unused `response` (admin-auth.spec.ts), `lineList` (quote-request.spec.ts), `beforeEach` import (image-actions.test.ts)
+- `vitest.config.ts` → `vitest.config.mts`: resolve ESM warning (Vite 5), `__dirname` → `import.meta.dirname`
+- `quality.yml`: run `test:unit` only; integration excluded explicitly
+- `integration.yml`: new dedicated workflow; fails if Supabase secrets absent
+- `package.json`: add `test:unit` and `test:integration` scripts
+
+### Validation results (2026-11-11)
+- Lint: 0 errors | TypeScript: 0 errors
+- Vitest: 95/95 unit pass | 6 integration files skipped (no Supabase in CI)
+- Build: 29 routes clean
+- Commit: `987f660`
+
+## Corte 6 — SEO, Identity, Map, Favicon (2026-11-11)
+
+### What was done
+
+**T1 — Identity & Contact cleanup:**
+- Created `src/lib/site-config.ts`: central source of truth for all business data
+- Removed fake `(815) 555-0123` phone number from all public pages (8+ files)
+- Replaced with confirmed email `contact@jd-power-warehouse.com`
+- Removed generic `facebook.com` / `instagram.com` links (no real accounts confirmed)
+- Fixed all 4 legal pages, 3 form placeholders, 2 CTA buttons, FloatingWhatsApp
+- Fixed home page: "Our Community (Motto)" → "Community First"
+
+**T2 — Google Maps:**
+- `BusinessLocationMap.tsx`: real Google Maps embed for Plainfield, IL
+  - `loading="lazy"`, accessible `title`, error fallback with directions link
+  - "Get Directions" overlay button
+- CSP updated: `frame-src https://www.google.com`, `img-src` expanded
+
+**T3 — SEO:**
+- `metadataBase: new URL('https://jd-power-warehouse.com')` in root layout
+- Title templates: `%s | JD Power Warehouse` on all inner pages
+- Full OpenGraph + Twitter Cards on root layout
+- Canonical URLs on all public pages
+- `src/app/sitemap.ts`: 11 static routes with priority/changeFrequency
+- `src/app/robots.ts`: allow public, disallow /admin/ /api/ /_next/
+
+**T4 — JSON-LD:**
+- `src/components/seo/JsonLd.tsx`: Organization + LocalBusiness (Plainfield, IL),
+  WebSite + SearchAction, BreadcrumbList helper
+- Injected into root layout `<head>`
+- No fake data: no ratings, reviews, unconfirmed address, prices
+
+**T5 — Favicon:**
+- `src/app/icon.tsx`: 32×32 branded JD icon (ImageResponse)
+- `src/app/apple-icon.tsx`: 180×180 Apple touch icon
+- `src/app/opengraph-image.tsx`: 1200×630 OG social card
+
+### Validation results (2026-11-11)
+- TypeScript strict: 0 errors
+- ESLint: 0 errors
+- Vitest: **95/95 unit pass**
+- Next.js build: clean (34 routes — 5 new SEO routes)
+- Commit: `916ea8b`
+
+### Open — requires owner confirmation before launch
+1. **Phone number**: real phone needed for `tel:` links + WhatsApp
+2. **WhatsApp number**: needed to re-enable WA reserve flow in shop/[id] and FloatingWhatsApp
+3. **Social media accounts**: real Facebook/Instagram URLs pending
+4. **Street address**: exact address for precise LocalBusiness JSON-LD
+5. **Legal page review**: owner/lawyer approval of privacy policy, terms, refund policy
+
+### OPEN QUESTIONS (business decisions)
+- Cart vs WhatsApp-first / email-first purchase flow?
+- EN/ES i18n from start?
+- B2B customer portal (login + quote tracking)?
+- Vercel deployment: DNS + env vars + admin user creation still pending
+
