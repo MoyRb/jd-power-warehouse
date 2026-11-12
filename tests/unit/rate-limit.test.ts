@@ -78,18 +78,36 @@ describe('checkQuoteRateLimit', () => {
     expect(result).toBe(true)
   })
 
-  it('calls RPC with correct parameters', async () => {
+  it('calls RPC with only p_id_hash (no caller-controlled limit params)', async () => {
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', 'https://test.supabase.co')
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY', 'anon-key')
     const rpc = makeRpcMock(true)
 
     await checkQuoteRateLimit(HASH)
 
+    // Limits are hard-coded in the SQL function — not passed as parameters
     expect(rpc).toHaveBeenCalledWith('check_quote_rate_limit', {
-      p_id_hash:        HASH,
-      p_limit:          5,
-      p_window_minutes: 15,
+      p_id_hash: HASH,
     })
+    // Verify no limit/window params were passed (would allow bypass)
+    const callArg = rpc.mock.calls[0][1] as Record<string, unknown>
+    expect(callArg).not.toHaveProperty('p_limit')
+    expect(callArg).not.toHaveProperty('p_window_minutes')
+  })
+
+  it('falls back to in-process Map when RPC errors (not fully open)', async () => {
+    vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', 'https://test.supabase.co')
+    vi.stubEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY', 'anon-key')
+    makeRpcMock(null, { message: 'db unavailable', code: '08006' })
+
+    // First 5 fallback calls should be allowed
+    for (let i = 0; i < 5; i++) {
+      const result = await checkQuoteRateLimit('fallback-hash-test')
+      expect(result).toBe(true)
+    }
+    // 6th call should be blocked by in-process fallback
+    const blocked = await checkQuoteRateLimit('fallback-hash-test')
+    expect(blocked).toBe(false)
   })
 
   it('uses anon key — not service_role key', async () => {
