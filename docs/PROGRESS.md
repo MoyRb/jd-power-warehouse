@@ -496,3 +496,82 @@ New migrations to push:
 - B2B customer portal (login + quote tracking)?
 - Vercel deployment: DNS + env vars + admin user creation still pending
 
+
+---
+
+## Hotfix — Production Launch Hardening (2026-11-11)
+
+**Branch:** `hotfix/production-launch-hardening`
+
+### What was fixed
+
+**T1 — Rate limiting (Supabase-backed)**
+- Replaced in-memory `Map` (unreliable across serverless instances) with Supabase PostgreSQL
+- New migration: `supabase/migrations/20261111000000_quote_rate_limits.sql`
+  - `quote_rate_limits` table (PK: `id_hash TEXT`)
+  - `check_quote_rate_limit(TEXT, INT, INT)` SECURITY DEFINER RPC — atomic INSERT…ON CONFLICT
+  - `cleanup_quote_rate_limits()` RPC — probabilistic cleanup (~1% per request)
+- New module: `src/lib/rate-limit.ts` — fail-open (allows request on DB error), anon key only
+- `src/app/quote/actions.ts` — removed Map, uses `checkQuoteRateLimit(ipHash)`
+- Tests: `tests/unit/rate-limit.test.ts` (7 tests)
+
+**T2 — SEO dinámico para productos**
+- `src/app/shop/[id]/page.tsx` — added `generateMetadata()` with dynamic title, description, canonical, OG, Twitter Cards
+- Added `Product` JSON-LD (`@type: Product`) with `Offer` schema (no fake ratings/reviews/warranties)
+- Used `react/cache` to deduplicate DB fetch between metadata and page component
+- BreadcrumbJsonLd wired to product detail page
+
+**T3 — Sitemap dinámico**
+- `src/app/sitemap.ts` — now fetches published products from Supabase when configured
+- Graceful fallback: if Supabase unavailable, returns static routes only (no build failure)
+- Used `headers()` trick instead of `export const dynamic` (incompatible with cacheComponents:true)
+
+**T4 — Canonical domain: www**
+- `src/lib/site-config.ts` — `url` changed from `jd-power-warehouse.com` to `www.jd-power-warehouse.com`
+- Propagates to: metadataBase, canonical URLs, sitemap, robots.txt, JSON-LD, OG, Twitter Cards
+
+**T5 — Google Maps: service area vs. exact address**
+- `BusinessLocationMap.tsx` — added "Service area map — exact address provided upon contact" badge
+- Renamed "Get Directions" → "View on Maps" (no exact address to navigate to)
+- JSON-LD: documented that `streetAddress` is `undefined` pending owner confirmation
+- No fake street address generated
+
+**T6 — CSP hardening**
+- `next.config.ts` — `unsafe-eval` removed from `script-src` in production
+- `isDev = process.env.NODE_ENV === 'development'` conditional
+- Development: `script-src 'self' 'unsafe-inline' 'unsafe-eval'`
+- Production: `script-src 'self' 'unsafe-inline'` (webpack HMR not needed in `next start`)
+
+**T7 — MockAdapter production guard**
+- `src/lib/db/index.ts` — `createAdapter()` function replaces direct export
+- Production + no SUPABASE_URL → throws `Error: NEXT_PUBLIC_SUPABASE_URL is not configured`
+- Development + no SUPABASE_URL → returns MockAdapter (safe for local work)
+- Tests: `tests/unit/db-adapter-selection.test.ts` (4 tests)
+
+**T8 — GitHub Actions**
+- `.github/workflows/integration.yml` — removed `push: branches: [main]` trigger
+- Integration Tests now only run on `workflow_dispatch` (manual trigger when secrets are ready)
+- Quality Gates workflow unchanged — still runs on every push to main
+
+### Validation results (2026-11-11)
+- TypeScript strict: 0 errors
+- ESLint: 0 errors
+- Vitest: **107/107 unit pass** (11 test files, up from 95/95)
+- Next.js build: clean (34 routes — no regression)
+- npm audit: 0 high/critical vulnerabilities (8 moderate in devDependencies only)
+
+### New migration pending push
+```bash
+npx supabase db push --remote
+# applies: 20261111000000_quote_rate_limits.sql
+```
+
+### Still blocked (owner actions required)
+1. **git push origin main** — Corte 6 commits not yet pushed to GitHub
+2. Vercel env vars: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
+3. All 10 migrations pushed to JDHOUSE: `npx supabase db push --remote`
+4. Admin user created in Supabase Auth + `admin_users` table row
+5. Phone/WhatsApp number confirmed → `src/lib/site-config.ts`
+6. Social media accounts confirmed → `src/lib/site-config.ts`
+7. Street address confirmed → `src/lib/site-config.ts` + JSON-LD
+8. Legal page review by owner/lawyer

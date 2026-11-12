@@ -10,7 +10,7 @@
  */
 export const SITE_CONFIG = {
   name: 'JD Power Warehouse',
-  url: 'https://jd-power-warehouse.com',
+  url: 'https://www.jd-power-warehouse.com',
   email: 'contact@jd-power-warehouse.com',
 
   // ── Contact — PENDING real values from business owner ──────────────────────

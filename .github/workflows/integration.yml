@@ -1,9 +1,11 @@
 name: Integration Tests
 
+# Integration tests require a live Supabase project.
+# They must be triggered manually (workflow_dispatch) once NEXT_PUBLIC_SUPABASE_URL
+# and NEXT_PUBLIC_SUPABASE_ANON_KEY are configured as repository secrets.
+# Removing the push trigger prevents an expected failure on every commit to main.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   contents: read

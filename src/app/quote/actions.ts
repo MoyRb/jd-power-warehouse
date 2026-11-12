@@ -4,30 +4,13 @@ import { headers } from 'next/headers'
 import { createHash } from 'crypto'
 import { db } from '@/lib/db'
 import { CreateQuoteSchema } from '@/lib/validations/quote'
+import { checkQuoteRateLimit } from '@/lib/rate-limit'
 
 // ---------------------------------------------------------------------------
-// Rate limiting — server-side only, keyed by IP hash
-// 5 submissions per 15 minutes per IP
+// IP hash helper — hashes the client IP before use or storage.
+// On Vercel, x-forwarded-for is set by the Vercel edge (not spoofable by
+// the client); the first value is the real client IP.
 // ---------------------------------------------------------------------------
-const rateLimitMap = new Map<string, { count: number; windowStart: number }>()
-const RATE_LIMIT = 5
-const RATE_WINDOW_MS = 15 * 60 * 1000
-
-function checkRateLimit(ipHash: string): boolean {
-  const now = Date.now()
-  const record = rateLimitMap.get(ipHash)
-
-  if (!record || now - record.windowStart > RATE_WINDOW_MS) {
-    rateLimitMap.set(ipHash, { count: 1, windowStart: now })
-    return true
-  }
-  if (record.count >= RATE_LIMIT) {
-    return false
-  }
-  record.count++
-  return true
-}
-
 async function getIpHash(): Promise<string> {
   try {
     const headerStore = await headers()
@@ -54,7 +37,8 @@ export async function submitQuoteAction(
 ): Promise<SubmitQuoteResult> {
   const ipHash = await getIpHash()
 
-  if (!checkRateLimit(ipHash)) {
+  const allowed = await checkQuoteRateLimit(ipHash)
+  if (!allowed) {
     return { success: false, error: 'Too many requests. Please wait a few minutes before trying again.' }
   }
 
